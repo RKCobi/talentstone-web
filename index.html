@@ -538,6 +538,11 @@
     .n1-sec h3::after, .n4-process h3::after { transform: scaleX(1); transition: none; }
     .n1-col:hover, .n4-p:hover, .n1-step:hover, .route a:hover, .n1-btn:hover, .inline-cta .a:hover { transform: none; }
   }
+  /* tlačítko „nahoru“ */
+  #toTop { position: fixed; right: 18px; bottom: 78px; z-index: 1200; width: 44px; height: 44px; border-radius: 50%; border: 1px solid rgba(255,255,255,.35); background: rgba(44,62,80,.9); color: #fff; font-size: 20px; line-height: 1; cursor: pointer; box-shadow: 0 8px 20px rgba(20,30,40,.25); opacity: 0; transform: translateY(10px); pointer-events: none; transition: opacity .3s, transform .3s, background-color .2s; }
+  #toTop.show { opacity: 1; transform: none; pointer-events: auto; }
+  #toTop:hover { background: #e41e26; }
+  @media (prefers-reduced-motion: reduce) { #toTop { transition: none; } }
 </style>
 </head>
 <body class="blue">
@@ -562,11 +567,11 @@
 </symbol></defs></svg>
       <!-- Hlavička: logo, navigace, jedno hlavní tlačítko, mobilní menu -->
       <div class="n1-top">
-        <div class="n1-brand">
+        <div class="n1-brand" onclick="goTop()" style="cursor:pointer;" title="Zpět na úvod">
           <div class="n1-logo" style="display:flex;align-items:center;gap:9px;"><svg viewBox="0 0 166 120" style="height:26px;width:36px;" aria-hidden="true"><path fill="#98a3ae" d="M8,120 V92 L32,84 V120 Z"/><path fill="#b8c2cc" d="M40,120 V74 L64,64 V120 Z"/><path fill="#cfd6dd" d="M72,120 V56 L96,44 V120 Z"/><path fill="#e3e8ec" d="M104,120 V40 L128,26 V120 Z"/><path fill="#e41e26" d="M136,120 L166,120 L151,8 Z"/></svg><span>Talent<span>Stone</span></span></div>
           <div class="n1-by">by <svg class="cs-logo" viewBox="0 0 348 36" role="img" aria-label="Cornerstone"><use href="#cs-logo"/></svg></div>
         </div>
-        <nav class="n1-nav" id="mainNav"><span onclick="jump(0,'sec-odbornici')">Pro odborníky</span><span onclick="jump(0,'sec-firmy')">Pro firmy</span><span onclick="jump(0,'sec-kandidati')">Kariérní přechod</span><span onclick="jump(0,'sec-ceny')">Tržiště služeb</span><span onclick="jump(0,'sec-faq')">FAQ</span></nav>
+        <nav class="n1-nav" id="mainNav"><span onclick="goTop()">Úvod</span><span onclick="jump(0,'sec-odbornici')">Pro odborníky</span><span onclick="jump(0,'sec-firmy')">Pro firmy</span><span onclick="jump(0,'sec-kandidati')">Kariérní přechod</span><span onclick="jump(0,'sec-ceny')">Tržiště služeb</span><span onclick="jump(0,'sec-faq')">FAQ</span></nav>
         <div class="n1-btn" onclick="jump(0,'sec-prihlaska')">Připojit se k síti</div>
         <button class="n1-burger" type="button" aria-label="Menu" aria-controls="mainNav" aria-expanded="false" onclick="toggleNav(this)">☰</button>
       </div>
@@ -1027,6 +1032,20 @@
         a.style.setProperty('--my', (e.clientY - r.top) + 'px');
       });
     });
+  })();
+
+  // Návrat na úvod: odkaz „Úvod“, logo a tlačítko ↑
+  function goTop() {
+    var top = document.querySelector('.n1-top'); if (top) top.classList.remove('open');
+    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    window.scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' });
+  }
+  (function () {
+    var b = document.createElement('button');
+    b.id = 'toTop'; b.type = 'button'; b.setAttribute('aria-label', 'Zpět na úvod'); b.title = 'Zpět na úvod'; b.textContent = '↑';
+    b.onclick = goTop; document.body.appendChild(b);
+    function s() { b.classList.toggle('show', window.scrollY > window.innerHeight * 0.9); }
+    window.addEventListener('scroll', s, { passive: true }); s();
   })();
 </script>
 </body>
