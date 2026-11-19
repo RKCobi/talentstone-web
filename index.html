@@ -16,48 +16,53 @@
 <meta name="robots" content="noindex, nofollow" />
 <title>TalentStone — Your Experience. Your Next Opportunity. (testovací verze)</title>
 <style>
+  /* ===== FÁZE 1 (19. 11.): písmo dle Brand Key – humanistický sans, hostovaný u nás (bez Google Fonts) ===== */
+  @font-face { font-family: 'Source Sans 3'; font-style: normal; font-weight: 200 900; font-display: swap; src: url(fonts/source-sans-3-latin-ext-wght-normal.woff2) format('woff2'); unicode-range: U+0100-02AF,U+0304,U+0308,U+0329,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF; }
+  @font-face { font-family: 'Source Sans 3'; font-style: normal; font-weight: 200 900; font-display: swap; src: url(fonts/source-sans-3-latin-wght-normal.woff2) format('woff2'); unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD; }
+  @font-face { font-family: 'Source Sans 3'; font-style: italic; font-weight: 200 900; font-display: swap; src: url(fonts/source-sans-3-latin-ext-wght-italic.woff2) format('woff2'); unicode-range: U+0100-02AF,U+0304,U+0308,U+0329,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF; }
+  @font-face { font-family: 'Source Sans 3'; font-style: italic; font-weight: 200 900; font-display: swap; src: url(fonts/source-sans-3-latin-wght-italic.woff2) format('woff2'); unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD; }
   /* Serif jako výchozí písmo = prémiový "adult" tón dle Brand Key */
-  :root { font-family: Georgia, 'Times New Roman', serif; color: #1a1a1a; }
+  :root { --ff: 'Source Sans 3', 'Segoe UI', system-ui, sans-serif; font-family: var(--ff); color: #1a1a1a; }
   /* Reset okrajů + jednotný box-sizing pro všechny prvky */
   * { box-sizing: border-box; margin: 0; }
   body { background: #eef1f4; }
   /* ===== N1: "Solidní kámen" – zkrácená verze (Toptal/Russell Reynolds insp.) ===== */
   /* Tmavá grafitová hlavička + mosazný akcent #c9a86a = vizuální identita dle Brand Key */
-  .n1-top { background: #0e2723; color: #f3efe6; padding: 26px 34px; font-family: system-ui, sans-serif; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 1100; box-shadow: 0 4px 18px rgba(20,30,40,.22); }
+  .n1-top { background: #0e2723; color: #f3efe6; padding: 26px 34px; font-family: var(--ff); display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 1100; box-shadow: 0 4px 18px rgba(20,30,40,.22); }
   /* Sticky hlavička nesmí překrývat začátek cílové sekce po skoku */
   [id^="sec-"] { scroll-margin-top: 104px; }
   /* Úzké obrazovky: navigace se zalamuje, hlavička zůstává kompaktní */
   @media (max-width: 900px) {
     .n1-top { flex-wrap: wrap; row-gap: 10px; padding: 14px 20px; }
   }
-  .n1-logo { font-family: Georgia, serif; font-size: 19px; letter-spacing: .5px; }
+  .n1-logo { font-family: Georgia, serif; /* wordmark loga – beze změny */ font-size: 19px; letter-spacing: .5px; }
   .n1-logo span { color: #c9a86a; } /* "Stone" v mosazné barvě */
   .n1-nav { display: flex; gap: 22px; font-size: 13px; color: #cfd8d3; }
   .n1-nav b { color: #fff; } /* aktivní položka navigace zvýrazněná */
   .n1-btn { background: #c9a86a; color: #0e2723; font-weight: 600; padding: 9px 18px; border-radius: 6px; font-size: 13px; }
   /* Hero s jemným svislým gradientem – hloubka, ne plochá barva */
   .n1-hero { padding: 64px 34px 54px; background: linear-gradient(180deg, #0e2723, #143a33); color: #f3efe6; }
-  .n1-hero h2 { font-family: Georgia, serif; font-size: 38px; max-width: 620px; line-height: 1.15; }
-  .n1-hero p { font-family: system-ui, sans-serif; font-size: 15px; color: #b9c7c0; max-width: 520px; margin: 16px 0 26px; }
-  .n1-cta { display: flex; gap: 12px; font-family: system-ui, sans-serif; }
+  .n1-hero h2 { font-family: var(--ff); font-size: 38px; max-width: 620px; line-height: 1.15; }
+  .n1-hero p { font-family: var(--ff); font-size: 15px; color: #b9c7c0; max-width: 520px; margin: 16px 0 26px; }
+  .n1-cta { display: flex; gap: 12px; font-family: var(--ff); }
   .n1-cta .a { background: #c9a86a; color: #0e2723; font-weight: 600; padding: 12px 22px; border-radius: 6px; font-size: 14px; }
   .n1-cta .b { border: 1px solid #6f8a80; color: #e7e2d5; padding: 12px 22px; border-radius: 6px; font-size: 14px; } /* sekundární CTA – obrys */
-  .n1-stats { display: flex; gap: 40px; margin-top: 38px; font-family: system-ui, sans-serif; flex-wrap: wrap; }
-  .n1-stats div b { font-family: Georgia, serif; font-size: 26px; color: #c9a86a; display: block; }
+  .n1-stats { display: flex; gap: 40px; margin-top: 38px; font-family: var(--ff); flex-wrap: wrap; }
+  .n1-stats div b { font-family: var(--ff); font-size: 26px; color: #c9a86a; display: block; }
   .n1-stats div span { font-size: 12px; color: #9fb2aa; }
   /* Trust bar pod hero – bílé pozadí, mosazná linka nahoře */
-  .n1-trust { background: #fff; padding: 22px 34px; font-family: system-ui, sans-serif; font-size: 12.5px; color: #555; border-top: 3px solid #c9a86a; display: flex; gap: 26px; align-items: center; flex-wrap: wrap; }
+  .n1-trust { background: #fff; padding: 22px 34px; font-family: var(--ff); font-size: 12.5px; color: #555; border-top: 3px solid #c9a86a; display: flex; gap: 26px; align-items: center; flex-wrap: wrap; }
   .n1-badge { display: inline-flex; align-items: center; gap: 6px; color: #0e2723; font-weight: 600; }
 
   /* ===== N1 KOMPLETNÍ WEB – sekce rozšířené stránky ===== */
   /* (Duplicitní .n1-* pravidla výše pokrývají hlavičku/hero; níže jsou sekce navíc.) */
   .n1-sec { padding: 50px 34px; } /* standardní svislý rytmus sekcí */
-  .n1-sec h3 { font-family: Georgia, serif; font-size: 26px; color: #0e2723; margin-bottom: 8px; }
+  .n1-sec h3 { font-family: var(--ff); font-size: 26px; color: #0e2723; margin-bottom: 8px; }
   .n1-sec .lead { color: #66706c; font-size: 14px; margin-bottom: 26px; max-width: 640px; }
   /* 4sloupcová mřížka cílových segmentů */
   .n1-cols { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
   .n1-col { border: 1px solid #e5e2da; border-radius: 10px; padding: 18px; }
-  .n1-col i { font-style: normal; color: #c9a86a; font-family: Georgia, serif; font-size: 22px; display: block; margin-bottom: 8px; } /* ◆ = kamenný motiv */
+  .n1-col i { font-style: normal; color: #c9a86a; font-family: var(--ff); font-size: 22px; display: block; margin-bottom: 8px; } /* ◆ = kamenný motiv */
   .n1-col b { display: block; color: #0e2723; font-size: 14px; margin-bottom: 5px; }
   .n1-col span { font-size: 12px; color: #6a736e; line-height: 1.5; display: block; }
   /* Tlačítka uvnitř karet segmentů (ceník v1.2) – původní .btn je scoped na .n1-plan */
@@ -66,7 +71,7 @@
   /* 4 kroky procesu – čísla 01–04 velkým serifem */
   .n1-steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; counter-reset: step; }
   .n1-step { position: relative; background: #f6f4ef; border-radius: 10px; padding: 18px; }
-  .n1-step i { font-style: normal; font-family: Georgia, serif; font-size: 30px; color: #d8cba8; display: block; }
+  .n1-step i { font-style: normal; font-family: var(--ff); font-size: 30px; color: #d8cba8; display: block; }
   .n1-step b { display: block; color: #0e2723; margin: 6px 0 4px; font-size: 13.5px; }
   .n1-step span { font-size: 12px; color: #6a736e; }
   /* Katalog prověřených expertů – 3 karty */
@@ -80,9 +85,9 @@
   .n1-price { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; max-width: 760px; }
   .n1-plan { border: 1px solid #e5e2da; border-radius: 12px; padding: 22px; }
   .n1-plan.pro { background: #0e2723; color: #f3efe6; border-color: #0e2723; }
-  .n1-plan b { font-family: Georgia, serif; font-size: 18px; display: block; }
-  .n1-plan .p { font-family: Georgia, serif; font-size: 30px; margin: 8px 0 2px; }
-  .n1-plan .p small { font-size: 12px; font-family: system-ui; color: #9fb2aa; }
+  .n1-plan b { font-family: var(--ff); font-size: 18px; display: block; }
+  .n1-plan .p { font-family: var(--ff); font-size: 30px; margin: 8px 0 2px; }
+  .n1-plan .p small { font-size: 12px; font-family: var(--ff); color: #9fb2aa; }
   .n1-plan ul { list-style: none; padding: 12px 0 0; margin: 0; }
   .n1-plan li { font-size: 12.5px; padding: 4px 0; color: inherit; opacity: .92; }
   .n1-plan li::before { content: "◆ "; color: #c9a86a; font-size: 10px; } /* odrážka jako kamínek */
@@ -96,19 +101,19 @@
   .n1-faq p { font-size: 13px; color: #6a736e; margin: 8px 0 0; line-height: 1.6; }
   /* Finální CTA sekce + patička */
   .n1-cta-sec { background: #0e2723; color: #f3efe6; padding: 46px 34px; display: flex; justify-content: space-between; align-items: center; gap: 20px; flex-wrap: wrap; }
-  .n1-cta-sec h3 { font-family: Georgia, serif; font-size: 24px; max-width: 520px; }
+  .n1-cta-sec h3 { font-family: var(--ff); font-size: 24px; max-width: 520px; }
   .n1-cta-sec p { font-size: 13px; color: #b9c7c0; margin-top: 6px; }
   .n1-foot { background: #0a1f1c; color: #8fa39b; padding: 24px 34px; font-size: 11.5px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
   /* Značkový blok: TalentStone + „by Cornerstone" + logo rodiče (bílá varianta) */
   .n1-brand { display: flex; flex-direction: column; }
-  .n1-by { display: flex; align-items: center; gap: 8px; font-family: system-ui, sans-serif; font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; color: #9fb2aa; margin-top: 3px; }
+  .n1-by { display: flex; align-items: center; gap: 8px; font-family: var(--ff); font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; color: #9fb2aa; margin-top: 3px; }
   .cs-logo { height: 11px; width: auto; display: inline-block; } /* bílé logo Cornerstone – jen na tmavém pozadí */
 
   /* ===== SEKCE „HLAVIČKA CORNERSTONE" (inspirace cornerstone-group.com/offices) ===== */
   /* Dvousloupcový layout jako na stránce kanceláře: intro + kontakt vlevo, specializace vpravo */
-  .cs-strip { display: grid; grid-template-columns: 1.1fr 1fr; gap: 40px; align-items: start; font-family: system-ui, sans-serif; }
+  .cs-strip { display: grid; grid-template-columns: 1.1fr 1fr; gap: 40px; align-items: start; font-family: var(--ff); }
   .cs-left .kicker { font-size: 11px; letter-spacing: 2px; color: #c9a86a; text-transform: uppercase; margin-bottom: 10px; }
-  .cs-left h3 { font-family: Georgia, serif; font-size: 24px; color: #0e2723; margin-bottom: 8px; }
+  .cs-left h3 { font-family: var(--ff); font-size: 24px; color: #0e2723; margin-bottom: 8px; }
   .cs-left .lead { font-size: 13.5px; color: #66706c; max-width: 420px; margin-bottom: 18px; }
   .cs-left .lead b { color: #0e2723; }
   .cs-contact { border-left: 3px solid #c9a86a; padding: 4px 0 4px 14px; font-size: 12.5px; color: #4c544f; line-height: 1.7; }
@@ -129,43 +134,43 @@
   .n1-nav span:hover, .foot-links span:hover { color: #c9a86a; }
 
   /* ===== N4: Sekce "Pro odborníky" (včleněná do N1 i jako samostatná obrazovka) ===== */
-  .n4-hero { background: linear-gradient(180deg, #143a33, #0e2723); color: #f3efe6; padding: 54px 34px; font-family: system-ui, sans-serif; }
+  .n4-hero { background: linear-gradient(180deg, #143a33, #0e2723); color: #f3efe6; padding: 54px 34px; font-family: var(--ff); }
   .n4-hero .kicker { font-size: 12px; letter-spacing: 2px; color: #c9a86a; text-transform: uppercase; margin-bottom: 14px; }
-  .n4-hero h2 { font-family: Georgia, serif; font-size: 34px; max-width: 640px; line-height: 1.2; }
+  .n4-hero h2 { font-family: var(--ff); font-size: 34px; max-width: 640px; line-height: 1.2; }
   .n4-hero p { color: #b9c7c0; font-size: 15px; max-width: 540px; margin: 14px 0 24px; }
   .n4-cta { display: inline-block; background: #c9a86a; color: #0e2723; font-weight: 600; padding: 12px 24px; border-radius: 6px; font-size: 14px; }
   .n4-cta.sec { background: none; border: 1px solid #6f8a80; color: #e7e2d5; margin-left: 10px; }
-  .n4-benefits { background: #fff; padding: 40px 34px; font-family: system-ui, sans-serif; }
-  .n4-benefits h3 { font-family: Georgia, serif; font-size: 24px; color: #0e2723; margin-bottom: 22px; }
+  .n4-benefits { background: #fff; padding: 40px 34px; font-family: var(--ff); }
+  .n4-benefits h3 { font-family: var(--ff); font-size: 24px; color: #0e2723; margin-bottom: 22px; }
   .n4-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; } /* 6 benefitů = mřížka 3×2 */
   .n4-b { border: 1px solid #e5e2da; border-radius: 10px; padding: 18px; }
-  .n4-b i { font-style: normal; color: #c9a86a; font-family: Georgia, serif; font-size: 22px; display: block; margin-bottom: 8px; }
+  .n4-b i { font-style: normal; color: #c9a86a; font-family: var(--ff); font-size: 22px; display: block; margin-bottom: 8px; }
   .n4-b b { display: block; color: #0e2723; font-size: 14px; margin-bottom: 5px; }
   .n4-b span { font-size: 12.5px; color: #6a736e; line-height: 1.55; display: block; }
-  .n4-process { background: #f6f4ef; padding: 40px 34px; font-family: system-ui, sans-serif; }
-  .n4-process h3 { font-family: Georgia, serif; font-size: 24px; color: #0e2723; margin-bottom: 6px; }
+  .n4-process { background: #f6f4ef; padding: 40px 34px; font-family: var(--ff); }
+  .n4-process h3 { font-family: var(--ff); font-size: 24px; color: #0e2723; margin-bottom: 6px; }
   .n4-process .lead { color: #66706c; font-size: 13.5px; margin-bottom: 22px; }
   .n4-pgrid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; } /* 5 kroků prověřování vedle sebe */
   .n4-p { background: #fff; border-radius: 10px; padding: 14px; position: relative; }
-  .n4-p i { font-style: normal; font-family: Georgia, serif; font-size: 24px; color: #d8cba8; display: block; }
+  .n4-p i { font-style: normal; font-family: var(--ff); font-size: 24px; color: #d8cba8; display: block; }
   .n4-p b { display: block; color: #0e2723; font-size: 12.5px; margin: 6px 0 3px; }
   .n4-p span { font-size: 11px; color: #6a736e; line-height: 1.45; display: block; }
   .n4-p .rej { font-size: 10px; color: #8a6d2f; background: #f4ead2; border-radius: 8px; padding: 2px 8px; display: inline-block; margin-top: 6px; } /* transparentní rejection rate */
-  .n4-quotes { background: #fff; padding: 40px 34px; font-family: system-ui, sans-serif; }
-  .n4-quotes h3 { font-family: Georgia, serif; font-size: 24px; color: #0e2723; margin-bottom: 22px; }
+  .n4-quotes { background: #fff; padding: 40px 34px; font-family: var(--ff); }
+  .n4-quotes h3 { font-family: var(--ff); font-size: 24px; color: #0e2723; margin-bottom: 22px; }
   .n4-qgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
   .n4-q { background: #f6f4ef; border-radius: 10px; padding: 20px; font-size: 13px; color: #4c544f; line-height: 1.6; }
   .n4-q b { display: block; margin-top: 10px; color: #0e2723; font-size: 12px; }
-  .n4-q i { font-style: normal; color: #c9a86a; font-family: Georgia, serif; font-size: 26px; display: block; margin-bottom: 6px; } /* ◆ jako "uvozovky" */
-  .n4-join { background: #0e2723; color: #f3efe6; padding: 44px 34px; font-family: system-ui, sans-serif; display: flex; justify-content: space-between; align-items: center; gap: 20px; flex-wrap: wrap; }
-  .n4-join h3 { font-family: Georgia, serif; font-size: 24px; max-width: 540px; }
+  .n4-q i { font-style: normal; color: #c9a86a; font-family: var(--ff); font-size: 26px; display: block; margin-bottom: 6px; } /* ◆ jako "uvozovky" */
+  .n4-join { background: #0e2723; color: #f3efe6; padding: 44px 34px; font-family: var(--ff); display: flex; justify-content: space-between; align-items: center; gap: 20px; flex-wrap: wrap; }
+  .n4-join h3 { font-family: var(--ff); font-size: 24px; max-width: 540px; }
   .n4-join p { font-size: 13px; color: #b9c7c0; margin-top: 6px; }
 
   /* ===== N5: ONBOARDING FLOW (3-krokový formulář poptávky) ===== */
   /* .ob = "onboarding" – karta formuláře, centrovaná, max 760px pro čitelnost */
-  .ob { background: #fff; border-radius: 14px; overflow: hidden; box-shadow: 0 10px 40px rgba(20,30,25,.14); font-family: system-ui, sans-serif; max-width: 760px; margin: 0 auto; }
+  .ob { background: #fff; border-radius: 14px; overflow: hidden; box-shadow: 0 10px 40px rgba(20,30,25,.14); font-family: var(--ff); max-width: 760px; margin: 0 auto; }
   .ob-top { background: #0e2723; color: #f3efe6; padding: 18px 28px; display: flex; justify-content: space-between; align-items: center; }
-  .ob-top .lg { font-family: Georgia, serif; font-size: 16px; }
+  .ob-top .lg { font-family: var(--ff); font-size: 16px; }
   .ob-top .lg span { color: #c9a86a; }
   /* Progress indikátory – 3 segmenty, mosazný = dokončený/aktivní (ovládá JS) */
   .ob-steps { display: flex; gap: 8px; padding: 16px 28px 0; }
@@ -175,11 +180,11 @@
   /* Jednotlivé kroky (panes) – zobrazuje se jen .on (přepíná JS) */
   .ob-pane { display: none; }
   .ob-pane.on { display: block; }
-  .ob-pane h3 { font-family: Georgia, serif; font-size: 21px; color: #0e2723; margin-bottom: 4px; }
+  .ob-pane h3 { font-family: var(--ff); font-size: 21px; color: #0e2723; margin-bottom: 4px; }
   .ob-pane .sub2 { font-size: 12.5px; color: #77807b; margin-bottom: 18px; }
   .ob-f { margin-bottom: 14px; } /* jedno pole formuláře */
   .ob-f label { display: block; font-size: 12px; font-weight: 600; color: #0e2723; margin-bottom: 5px; }
-  .ob-f input, .ob-f select, .ob-f textarea { width: 100%; border: 1px solid #d9d5cb; border-radius: 8px; padding: 10px 12px; font-size: 13px; font-family: system-ui; color: #333; background: #fff; }
+  .ob-f input, .ob-f select, .ob-f textarea { width: 100%; border: 1px solid #d9d5cb; border-radius: 8px; padding: 10px 12px; font-size: 13px; font-family: var(--ff); color: #333; background: #fff; }
   .ob-f textarea { min-height: 64px; resize: vertical; }
   .ob-row { display: flex; gap: 12px; } /* dvě pole vedle sebe */
   .ob-row .ob-f { flex: 1; }
@@ -364,7 +369,7 @@
   .n1-hero > svg.ridge { position: absolute; left: 0; right: 0; bottom: -1px; width: 100%; height: 74px; z-index: 0; display: block; }
 
   /* 7) Plovoucí průvodce „Kde začít?" — konverzační navigace (inspirace Happydance) */
-  #guide { position: fixed; left: 18px; bottom: 18px; z-index: 1200; font-family: system-ui, sans-serif; }
+  #guide { position: fixed; left: 18px; bottom: 18px; z-index: 1200; font-family: var(--ff); }
   #guideChip { display: inline-flex; align-items: center; gap: 9px; background: #2c3e50; color: #fff; border: none; border-radius: 999px; padding: 12px 18px; font-size: 13.5px; font-weight: 600; cursor: pointer; box-shadow: 0 10px 24px rgba(44,62,80,.28); transition: transform .25s ease, background .25s ease; }
   #guideChip:hover { transform: translateY(-2px); background: #3c5165; }
   #guideChip .dot { width: 8px; height: 8px; border-radius: 50%; background: #e41e26; box-shadow: 0 0 0 0 rgba(228,30,38,.5); animation: pulse 2.2s infinite; }
@@ -378,7 +383,7 @@
   #guidePanel a b { color: #e41e26; font-weight: 700; margin-right: 7px; }
 
   /* 8) Sticky CTA — objeví se po odscrollování z hero */
-  #stickyCta { position: fixed; right: 18px; bottom: 18px; z-index: 1200; background: #e41e26; color: #fff; border: none; border-radius: 999px; padding: 13px 22px; font-size: 13.5px; font-weight: 700; font-family: system-ui, sans-serif; cursor: pointer; box-shadow: 0 12px 28px rgba(178,21,30,.4); opacity: 0; transform: translateY(16px); pointer-events: none; transition: opacity .3s ease, transform .3s ease, background .2s ease, color .2s ease; }
+  #stickyCta { position: fixed; right: 18px; bottom: 18px; z-index: 1200; background: #e41e26; color: #fff; border: none; border-radius: 999px; padding: 13px 22px; font-size: 13.5px; font-weight: 700; font-family: var(--ff); cursor: pointer; box-shadow: 0 12px 28px rgba(178,21,30,.4); opacity: 0; transform: translateY(16px); pointer-events: none; transition: opacity .3s ease, transform .3s ease, background .2s ease, color .2s ease; }
   #stickyCta.show { opacity: 1; transform: none; pointer-events: auto; }
   #stickyCta:hover { background: #ff9299; color: #2c3e50; }
 
@@ -394,21 +399,21 @@
   /* 10) Reference — velké citáty (inspirace Happydance: „Happy customers") */
   .n1-quotes { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-top: 22px; }
   .n1-q { border: 1px solid #d6dde5; border-radius: 12px; padding: 20px 22px 18px; background: #fff; position: relative; }
-  .n1-q::before { content: "„"; font-family: Georgia, serif; font-size: 52px; line-height: 1; color: #e41e26; position: absolute; top: 8px; left: 16px; }
-  .n1-q p { font-family: Georgia, serif; font-size: 15.5px; color: #2c3e50; line-height: 1.6; margin: 30px 0 14px; font-style: italic; }
-  .n1-q .who b { display: block; font-size: 13px; color: #2c3e50; font-family: system-ui, sans-serif; }
-  .n1-q .who span { font-size: 11.5px; color: #5c6875; font-family: system-ui, sans-serif; }
-  .n1-sec .demo-note { font-size: 11.5px; color: #8a95a1; font-family: system-ui, sans-serif; margin-top: 12px; font-style: italic; }
+  .n1-q::before { content: "„"; font-family: var(--ff); font-size: 52px; line-height: 1; color: #e41e26; position: absolute; top: 8px; left: 16px; }
+  .n1-q p { font-family: var(--ff); font-size: 15.5px; color: #2c3e50; line-height: 1.6; margin: 30px 0 14px; font-style: italic; }
+  .n1-q .who b { display: block; font-size: 13px; color: #2c3e50; font-family: var(--ff); }
+  .n1-q .who span { font-size: 11.5px; color: #5c6875; font-family: var(--ff); }
+  .n1-sec .demo-note { font-size: 11.5px; color: #8a95a1; font-family: var(--ff); margin-top: 12px; font-style: italic; }
   @media (max-width: 720px) { .n1-quotes { grid-template-columns: 1fr; } }
 
   /* 11) Veřejný katalog prověřených odborníků — prvek N3 propojený do hlavního webu */
   .n1-search { display: flex; gap: 10px; margin: 20px 0 6px; max-width: 500px; }
-  .n1-search input { flex: 1; padding: 11px 14px; border: 1px solid #c6ced6; border-radius: 8px; font-size: 13px; font-family: system-ui, sans-serif; outline: none; }
+  .n1-search input { flex: 1; padding: 11px 14px; border: 1px solid #c6ced6; border-radius: 8px; font-size: 13px; font-family: var(--ff); outline: none; }
   .n1-search input:focus { border-color: #e41e26; box-shadow: 0 0 0 3px rgba(228,30,38,.08); }
-  .n1-search button { background: #2c3e50; color: #fff; border: none; border-radius: 8px; padding: 11px 18px; font-size: 13px; font-weight: 600; font-family: system-ui, sans-serif; cursor: pointer; transition: background .2s ease; }
+  .n1-search button { background: #2c3e50; color: #fff; border: none; border-radius: 8px; padding: 11px 18px; font-size: 13px; font-weight: 600; font-family: var(--ff); cursor: pointer; transition: background .2s ease; }
   .n1-search button:hover { background: #3c5165; }
   .n1-exp.hidden { display: none; }
-  .n1-count { font-size: 12px; color: #5c6875; font-family: system-ui, sans-serif; margin-top: 10px; }
+  .n1-count { font-size: 12px; color: #5c6875; font-family: var(--ff); margin-top: 10px; }
 
   /* 12) Pilíře: DYNAMICKÉ ZVÝRAZNĚNÍ — červená linka přejede kartu po odhalení,
         číslo se za běhu počítadla rozsvítí červeně a hover rozdělí popředí od mlhy */
@@ -429,14 +434,110 @@
   @keyframes jumpFlash { 0% { box-shadow: inset 0 0 0 4px #e41e26; } 100% { box-shadow: inset 0 0 0 4px transparent; } }
   .jump-flash { animation: jumpFlash 1.6s ease-out 1; }
   /* ===== TESTOVACÍ VERZE: lišta, esence, Tally ===== */
-  #testBar { background: #e41e26; color: #fff; font-family: system-ui, sans-serif; font-size: 13px; text-align: center; padding: 8px 16px; }
+  #testBar { background: #e41e26; color: #fff; font-family: var(--ff); font-size: 13px; text-align: center; padding: 8px 16px; }
   #testBar b { font-weight: 700; }
-  .n1-hero .esence { font-family: Georgia, serif; font-size: 21px; font-style: italic; color: #e3e8ec; margin: 10px 0 0; max-width: 620px; }
+  .n1-hero .esence { font-family: var(--ff); font-size: 21px; font-style: italic; color: #e3e8ec; margin: 10px 0 0; max-width: 620px; }
   .tally-card { background: #fff; border-radius: 14px; box-shadow: 0 10px 40px rgba(20,30,25,.14); max-width: 760px; margin: 0 auto; padding: 22px 26px 10px; }
   .tally-card iframe { display: block; width: 100%; border: 0; min-height: 420px; }
-  .tally-fallback { font-family: system-ui, sans-serif; font-size: 12.5px; color: #5c6875; text-align: center; margin-top: 12px; }
+  .tally-fallback { font-family: var(--ff); font-size: 12.5px; color: #5c6875; text-align: center; margin-top: 12px; }
   .tally-fallback a { color: #b3151e; }
   @media (max-width: 600px) { .tally-card { padding: 14px 12px 6px; } }
+
+  /* ===== FÁZE 1: nadpisy, rozcestník, mobil ===== */
+  h2, h3, h4 { font-weight: 650; letter-spacing: -0.01em; }
+  .n1-hero h2 { font-size: 44px; font-weight: 700; letter-spacing: -0.02em; }
+  .n1-hero .esence { font-family: var(--ff); font-style: normal; font-weight: 400; font-size: 22px; }
+  .n1-hero .intro { font-size: 16px; max-width: 560px; margin: 14px 0 0; }
+  .n1-q p { font-style: normal; }
+  .route { display: grid; grid-template-columns: repeat(2, minmax(0, 340px)); gap: 16px; margin-top: 30px; font-family: var(--ff); }
+  .route a { display: block; text-decoration: none; background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.22); border-radius: 12px; padding: 20px 22px; color: #f0f3f6; transition: background .2s, border-color .2s, transform .2s; cursor: pointer; }
+  .route a:hover { background: rgba(255,255,255,.15); border-color: #e41e26; transform: translateY(-2px); }
+  .route a small { display: block; font-size: 11.5px; letter-spacing: 1.6px; text-transform: uppercase; color: #ff9299; margin-bottom: 6px; }
+  .route a b { display: block; font-size: 20px; font-weight: 650; margin-bottom: 6px; }
+  .route a span { display: block; font-size: 14px; color: #c6ced6; line-height: 1.45; }
+  .route a em { display: inline-block; margin-top: 14px; font-style: normal; font-weight: 600; font-size: 14px; background: #e41e26; color: #fff; padding: 9px 16px; border-radius: 6px; }
+  .route a.alt em { background: none; border: 1px solid #c6ced6; color: #f0f3f6; }
+  .route-more { margin-top: 14px; font-size: 13.5px; color: #c6ced6; font-family: var(--ff); }
+  .route-more span { color: #fff; text-decoration: underline; cursor: pointer; }
+  .sub-h { font-size: 19px; color: #2c3e50; margin: 34px 0 6px; }
+  .inline-cta { margin-top: 22px; display: flex; gap: 12px; flex-wrap: wrap; font-family: var(--ff); }
+  .inline-cta .a { background: #e41e26; color: #fff; font-weight: 600; padding: 11px 20px; border-radius: 6px; font-size: 14px; cursor: pointer; }
+  .inline-cta .b { border: 1px solid #8a95a1; color: #2c3e50; padding: 11px 20px; border-radius: 6px; font-size: 14px; cursor: pointer; }
+  .n1-cta-sec .inline-cta { margin-top: 0; }
+  .n1-cta-sec .inline-cta .b { color: #e3e8ec; border-color: #7c8a98; }
+  .cs-quote { margin-top: 30px; }
+  .cs-contact span { display: block; }
+  .n1-q::before { top: 2px !important; }
+  .n1-q p { margin-top: 38px !important; }
+  .n1-burger { display: none; background: none; border: 1px solid rgba(255,255,255,.35); color: #fff; border-radius: 6px; width: 40px; height: 36px; font-size: 20px; line-height: 1; cursor: pointer; }
+  @media (max-width: 900px) {
+    .n1-top { flex-wrap: wrap; padding: 12px 16px; }
+    .n1-burger { display: block; order: 3; }
+    .n1-btn { order: 2; margin-left: auto; margin-right: 10px; padding: 8px 12px; }
+    .n1-nav { display: none; order: 4; width: 100%; flex-direction: column; gap: 0; padding-top: 8px; }
+    .n1-top.open .n1-nav { display: flex; }
+    .n1-nav span { padding: 12px 2px; border-top: 1px solid rgba(255,255,255,.12); font-size: 15px; }
+    .n1-cols, .n4-pgrid, .n4-grid { grid-template-columns: repeat(2, 1fr) !important; }
+    .n1-steps { grid-template-columns: repeat(2, 1fr) !important; }
+    .cs-strip { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 600px) {
+    .n1-btn { display: none; }
+    .n1-burger { margin-left: auto; }
+    .n1-hero { padding: 40px 16px 70px !important; }
+    .n1-hero h2 { font-size: 32px; }
+    .n1-hero .esence { font-size: 19px; }
+    .route { grid-template-columns: 1fr; }
+    .n1-stats { gap: 18px 28px; }
+    .n1-sec, .n4-process, .n1-trust, .n1-cta-sec, .n1-foot { padding-left: 16px !important; padding-right: 16px !important; }
+    .n1-cols, .n4-pgrid, .n4-grid, .n1-steps { grid-template-columns: 1fr !important; }
+    .n1-trust { flex-direction: column; gap: 8px; }
+    #guide { display: none; }
+  }
+
+  /* ===== ANIMACE (19. 11.): decentní pohyb, vše vypnuto při „omezit pohyb“ ===== */
+  /* hlavička se při skrolování zúží a zprůhlední (sklo) */
+  .n1-top { transition: padding .3s ease, box-shadow .3s ease, background-color .3s ease; }
+  .blue .n1-top.scrolled { padding-top: 12px; padding-bottom: 12px; background: rgba(44,62,80,.88) !important; -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); }
+  /* claim: slova vyjíždějí postupně a zaostřují se */
+  .n1-hero > h2.split { animation: none; opacity: 1; }
+  .n1-hero h2 .w { display: inline-block; opacity: 0; filter: blur(8px); transform: translateY(.35em); animation: wIn .9s cubic-bezier(.2,.7,.25,1) forwards; animation-delay: calc(.1s + var(--i) * .09s); }
+  @keyframes wIn { to { opacity: 1; filter: blur(0); transform: none; } }
+  /* vlajka na vrcholu hřebene: tyč se vykreslí, vlajka jemně vlaje */
+  .ridge .pole { stroke-dasharray: 20; stroke-dashoffset: 20; animation: pole .8s 1.1s ease-out forwards; }
+  .ridge .flag { transform-box: fill-box; transform-origin: left center; transform: scaleX(0); animation: flagIn .5s 1.8s ease-out forwards, flagWave 3.2s 2.3s ease-in-out infinite; }
+  @keyframes pole { to { stroke-dashoffset: 0; } }
+  @keyframes flagIn { to { transform: scaleX(1); } }
+  @keyframes flagWave { 0%,100% { transform: scaleX(1) skewY(0); } 50% { transform: scaleX(.86) skewY(-6deg); } }
+  /* karty rozcestníku: světlo sleduje kurzor */
+  .route a { background-image: radial-gradient(260px circle at var(--mx, 50%) var(--my, 50%), rgba(255,255,255,.16), transparent 65%); }
+  .route a em { transition: transform .25s ease, box-shadow .25s ease; }
+  .route a:hover em { transform: translateX(4px); }
+  .n1-col, .n4-p, .n1-step { transition: transform .3s ease, box-shadow .3s ease, opacity .6s ease; }
+  .n1-col:hover, .n4-p:hover, .n1-step:hover { transform: translateY(-4px); box-shadow: 0 14px 30px rgba(44,62,80,.12); }
+  .n1-btn, .inline-cta .a, .inline-cta .b, #stickyCta { transition: transform .2s ease, box-shadow .2s ease, background-color .2s ease; }
+  .n1-btn:hover, .inline-cta .a:hover { transform: translateY(-1px); box-shadow: 0 8px 20px rgba(228,30,38,.35); }
+  /* běžící pás rolí */
+  .marquee { background: #2c3e50; overflow: hidden; padding: 14px 0; font-family: var(--ff); -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); }
+  .mq-track { display: flex; width: max-content; animation: mq 48s linear infinite; }
+  .marquee:hover .mq-track { animation-play-state: paused; }
+  .mq-row { display: flex; align-items: center; }
+  .mq-row span { color: #e3e8ec; font-size: 15px; font-weight: 500; letter-spacing: .3px; white-space: nowrap; padding: 0 18px; }
+  .mq-row i { font-style: normal; color: #e41e26; font-size: 10px; }
+  @keyframes mq { to { transform: translateX(-50%); } }
+  /* nadpisy sekcí: červená linka se „vytáhne“ při najetí */
+  .n1-sec h3::after, .n4-process h3::after { content: ""; display: block; width: 44px; height: 3px; border-radius: 2px; background: #e41e26; margin-top: 10px; transform: scaleX(0); transform-origin: left; transition: transform .7s .25s cubic-bezier(.2,.7,.25,1); }
+  .n1-sec h3[style*="center"]::after { margin-left: auto; margin-right: auto; transform-origin: center; }
+  .n1-sec h3.in::after, .n4-process h3.in::after { transform: scaleX(1); }
+  .cs-quote { padding-top: 0; }
+  @media (prefers-reduced-motion: reduce) {
+    .n1-hero h2 .w { animation: none; opacity: 1; filter: none; transform: none; }
+    .ridge .pole { animation: none; stroke-dashoffset: 0; }
+    .ridge .flag { animation: none; transform: none; }
+    .mq-track { animation: none; }
+    .n1-sec h3::after, .n4-process h3::after { transform: scaleX(1); transition: none; }
+    .n1-col:hover, .n4-p:hover, .n1-step:hover, .route a:hover, .n1-btn:hover, .inline-cta .a:hover { transform: none; }
+  }
 </style>
 </head>
 <body class="blue">
@@ -459,26 +560,27 @@
 <path d="M8.43645 8.44092C8.92058 8.94932 9.70319 9.20605 10.8709 9.20605H17.9967V12.6954H10.2028C8.32863 12.6954 6.95543 12.1015 6.05078 11.0157"/>
 <path d="M29.7793 11.2008C30.7948 10.1128 31.2833 8.46715 31.2833 6.38486V6.31058C31.2833 2.37573 29.539 0 25.7905 0H21.1514V3.48939H25.1225C27.3864 3.48939 28.2029 4.4545 28.2029 6.34768C28.2029 7.29426 27.9988 8.00884 27.5117 8.48676"/>
 </symbol></defs></svg>
-      <!-- Hlavička: logo, navigace pro obě strany trhu, hlavní CTA -->
+      <!-- Hlavička: logo, navigace, jedno hlavní tlačítko, mobilní menu -->
       <div class="n1-top">
-        <!-- Značka: TalentStone + endorsement rodiče („by Cornerstone" + logo) -->
         <div class="n1-brand">
           <div class="n1-logo" style="display:flex;align-items:center;gap:9px;"><svg viewBox="0 0 166 120" style="height:26px;width:36px;" aria-hidden="true"><path fill="#98a3ae" d="M8,120 V92 L32,84 V120 Z"/><path fill="#b8c2cc" d="M40,120 V74 L64,64 V120 Z"/><path fill="#cfd6dd" d="M72,120 V56 L96,44 V120 Z"/><path fill="#e3e8ec" d="M104,120 V40 L128,26 V120 Z"/><path fill="#e41e26" d="M136,120 L166,120 L151,8 Z"/></svg><span>Talent<span>Stone</span></span></div>
           <div class="n1-by">by <svg class="cs-logo" viewBox="0 0 348 36" role="img" aria-label="Cornerstone"><use href="#cs-logo"/></svg></div>
         </div>
-        <!-- Navigace: každá položka skroluje na příslušnou sekci (jump: obrazovka 0 + ID sekce) -->
-        <div class="n1-nav"><span onclick="jump(0,'sec-odbornici')"><b>Pro odborníky</b></span><span onclick="jump(0,'sec-poptavka',1)">Pro firmy</span><span onclick="jump(0,'sec-kandidati')">Lidé v kariérním přechodu</span><span onclick="jump(0,'sec-funguje')">Jak to funguje</span><span onclick="jump(0,'sec-ceny')">Tržiště služeb</span><span onclick="jump(0,'sec-faq')">FAQ</span></div>
-        <!-- Hlavní CTA vede na 3krokový formulář poptávky (reset na krok 0) -->
+        <nav class="n1-nav" id="mainNav"><span onclick="jump(0,'sec-odbornici')">Pro odborníky</span><span onclick="jump(0,'sec-firmy')">Pro firmy</span><span onclick="jump(0,'sec-kandidati')">Kariérní přechod</span><span onclick="jump(0,'sec-ceny')">Tržiště služeb</span><span onclick="jump(0,'sec-faq')">FAQ</span></nav>
         <div class="n1-btn" onclick="jump(0,'sec-prihlaska')">Připojit se k síti</div>
+        <button class="n1-burger" type="button" aria-label="Menu" aria-controls="mainNav" aria-expanded="false" onclick="toggleNav(this)">☰</button>
       </div>
 
-      <!-- Hero: brand esence (mění se dle přepnutého masterbrandu) + CTA + statistiky důvěry -->
-      <!-- Hero: expert-first claim dle prezentace Leadership Network -->
+      <!-- Hero: claim + esence + rozcestník pro dvě cílové skupiny -->
       <div class="n1-hero">
         <h2>Your Experience. Your Next Opportunity.</h2>
         <p class="esence">Odbornost, na kterou se staví.</p>
-        <p>Ekosystém pro zkušené manažery a odborníky, kteří chtějí být připraveni na svou další profesní kapitolu — nová vedoucí role, interim management, poradenství, dozorčí rady, nebo jen rozšíření profesních možností do budoucna. Pod hlavičkou Cornerstone, s mezinárodní sítí.</p>
-        <div class="n1-cta"><span class="a" onclick="jump(0,'sec-prihlaska')">Připojit se k síti</span><span class="b" onclick="jump(0,'sec-poptavka',1)">Hledám experty pro firmu</span></div>
+        <p class="intro">Síť zkušených manažerů a odborníků pro interim, poradenství, dozorčí rady i další vedoucí role. Pod hlavičkou Cornerstone.</p>
+        <div class="route">
+          <a onclick="jump(0,'sec-odbornici')"><small>Jsem odborník / manažer</small><b>Připravte svou další příležitost</b><span>Prověřený profil, nabídky na míru a podpora při přechodu do nové role.</span><em>Připojit se k síti →</em></a>
+          <a class="alt" onclick="jump(0,'sec-firmy')"><small>Hledám experta pro firmu</small><b>Interim, projekt nebo fractional role</b><span>Vybereme za vás prověřené kandidáty. Zdarma a nezávazně.</span><em>Zadat poptávku →</em></a>
+        </div>
+        <p class="route-more">Procházíte kariérním přechodem? <span onclick="jump(0,'sec-kandidati')">Program PeopleSphere™</span></p>
         <div class="n1-stats">
           <div><b>35+ let</b><span>zkušeností hlavičky Cornerstone</span></div>
           <div><b>70+ zemí</b><span>síť Cornerstone International Group</span></div>
@@ -487,8 +589,8 @@
         </div>
         <svg class="ridge" viewBox="0 -10 1200 80" preserveAspectRatio="none" aria-hidden="true">
           <path fill="#ffffff" d="M0,70 L0,30 L90,46 L170,16 L260,40 L340,24 L430,48 L520,10 L610,38 L700,20 L790,44 L880,12 L970,36 L1060,22 L1150,46 L1200,28 L1200,70 Z"/>
-          <path stroke="#e41e26" stroke-width="2.5" fill="none" d="M520,10 L520,-6"/>
-          <path fill="#e41e26" d="M520,-6 L538,-1 L520,4 Z"/>
+          <path class="pole" stroke="#e41e26" stroke-width="2.5" fill="none" d="M520,10 L520,-6"/>
+          <path class="flag" fill="#e41e26" d="M520,-6 L538,-1 L520,4 Z"/>
         </svg>
       </div>
 
@@ -499,16 +601,14 @@
         <span>Hodinové sazby v souladu s minimální mzdou</span>
       </div>
 
-      <!-- ===== SEKCE: TALENTSTONE LEADERSHIP NETWORK (expert-first, dle prezentace) ===== -->
-      <div class="n4-hero" id="sec-odbornici" style="padding:44px 34px;">
-        <div class="kicker">TalentStone Leadership Network · by Cornerstone</div>
-        <h2 style="font-size:30px;">Your Experience. Your Next Opportunity.</h2>
-        <p>Během kariéry přicházejí okamžiky, kdy je potřeba udělat další krok — plánovaně, nebo v důsledku reorganizace a vývoje trhu. Pro zkušené manažery a odborníky kariérní změna neznamená začínat znovu: znamená najít nový způsob, jak využít zkušenosti, znalosti a kontakty budované po mnoho let. Interim, poradenství, dozorčí rady — nebo další vedoucí role.</p>
-        <span class="n4-cta" onclick="jump(0,'sec-prihlaska')">Připojit se k síti</span><span class="n4-cta sec" onclick="jump(0,'sec-pilire')">Pět pilířů sítě ↓</span>
-      </div>
-      <div class="n4-process" id="sec-pilire" style="padding-bottom:34px;">
-        <h3>Pět pilířů Leadership Network</h3>
-        <p class="lead">Ekosystém pro zkušené profesionály, kteří chtějí být připraveni na svou další profesní kapitolu.</p>
+      <!-- Běžící pás rolí (inspirace: logo marquee) – jen to, co skutečně nabízíme -->
+      <div class="marquee" aria-hidden="true"><div class="mq-track"><div class="mq-row"><span>Interim CFO</span><i>◆</i><span>Interim COO</span><i>◆</i><span>Fractional CHRO</span><i>◆</i><span>Turnaround</span><i>◆</i><span>Transformace</span><i>◆</i><span>Board advisory</span><i>◆</i><span>Dozorčí rady</span><i>◆</i><span>Executive coaching</span><i>◆</i><span>Vedení projektů</span><i>◆</i><span>Výroba / Operations</span><i>◆</i><span>Finance</span><i>◆</i><span>IT / Digital</span><i>◆</i><span>Mentoring</span><i>◆</i></div><div class="mq-row"><span>Interim CFO</span><i>◆</i><span>Interim COO</span><i>◆</i><span>Fractional CHRO</span><i>◆</i><span>Turnaround</span><i>◆</i><span>Transformace</span><i>◆</i><span>Board advisory</span><i>◆</i><span>Dozorčí rady</span><i>◆</i><span>Executive coaching</span><i>◆</i><span>Vedení projektů</span><i>◆</i><span>Výroba / Operations</span><i>◆</i><span>Finance</span><i>◆</i><span>IT / Digital</span><i>◆</i><span>Mentoring</span><i>◆</i></div></div></div>
+
+      <!-- 1) PRO ODBORNÍKY: pět pilířů -->
+      <div class="n4-process" id="sec-odbornici" style="background:#fff;">
+        <div class="kicker" style="font-size:11px;letter-spacing:2px;text-transform:uppercase;margin-bottom:10px;color:#b3151e;">Pro odborníky · TalentStone Leadership Network</div>
+        <h3>Kariérní změna neznamená začínat znovu</h3>
+        <p class="lead">Znamená najít nový způsob, jak využít zkušenosti, znalosti a kontakty budované po mnoho let. Síť stojí na pěti pilířích.</p>
         <div class="n4-pgrid">
           <div class="n4-p"><i>01</i><b>Executive Talent Pool</b><span>Vstupní brána do sítě. C-level, ředitelé, experti a interim manažeři — segmentovaní dle oboru, funkce a lokality.</span></div>
           <div class="n4-p"><i>02</i><b>Career Transition Program</b><span>Osobní značka, životopis a LinkedIn, příprava na pohovory, individuální koučink, AI nástroje, podpora expertů.</span></div>
@@ -516,19 +616,10 @@
           <div class="n4-p"><i>04</i><b>Certified Interim Leaders</b><span>Certifikace potvrzuje zkušenosti a připravenost převzít transformační projekty, krize i dočasné vedení.</span></div>
           <div class="n4-p"><i>05</i><b>Interim Community</b><span>Dlouhodobé zázemí: networking, sdílení zkušeností, mentoring, viditelnost — až po board role.</span></div>
         </div>
-        <p style="font-family:system-ui;font-size:12.5px;color:#5c6875;margin-top:14px;">Zajímá vás, <span style="color:#b3151e;cursor:pointer;text-decoration:underline;" onclick="jump(0,'sec-provereni')">jak probíhá prověření ↓</span></p>
+        <div class="inline-cta"><span class="a" onclick="jump(0,'sec-prihlaska')">Připojit se k síti</span><span class="b" onclick="jump(0,'sec-provereni')">Jak probíhá prověření ↓</span></div>
       </div>
-      <div class="n4-benefits" id="sec-proc">
-        <h3>Proč se připojit</h3>
-        <div class="n4-grid">
-          <div class="n4-b"><i>◆</i><b>Silná jistota v kariéře</b><span>Buďte připraveni, až to budete potřebovat — dlouhodobé partnerství, ne jednorázový program.</span></div>
-          <div class="n4-b"><i>◆</i><b>Podpora při transformaci</b><span>Odborné vedení na cestě ke změně: osobní značka, LinkedIn, pohovory, koučink, AI nástroje.</span></div>
-          <div class="n4-b"><i>◆</i><b>Certifikace interim lídra</b><span>Dovednosti a certifikaci pro samostatné vedení transformačních projektů.</span></div>
-          <div class="n4-b"><i>◆</i><b>Síla značky a důvěryhodnost</b><span>Využijte reputaci Cornerstone — 35+ let v executive search a interim managementu.</span></div>
-          <div class="n4-b"><i>◆</i><b>Nové příležitosti</b><span>Přístup k exekutivním, interim, poradenským a dozorčím rolím i projektům.</span></div>
-          <div class="n4-b"><i>◆</i><b>Profesionální komunita</b><span>Propojte se, sdílejte a rozvíjejte se s kolegy a experty napříč obory.</span></div>
-        </div>
-      </div>
+
+      <!-- 2) PROVĚŘENÍ -->
       <div class="n4-process" id="sec-provereni">
         <h3>Jak se stanete prověřeným odborníkem</h3>
         <p class="lead">Pět kroků, obvykle do 7 dní. Pokud nevyhovíte, řekneme vám to zdvořile a s vysvětlením.</p>
@@ -541,75 +632,34 @@
         </div>
       </div>
 
-      <!-- Sekce: cílové segmenty firem (4 karty) -->
+
+      <!-- 3) PRO FIRMY: kdy nás potřebujete + jak spolupracujeme -->
       <div class="n1-sec" id="sec-firmy">
-        <h3>Pro firmy: kdy nás potřebujete</h3>
-        <p class="lead">Prověření odborníci z Leadership Network i lidé v kariérním přechodu — propojení s reálnou poptávkou firem, v ČR s mezinárodním standardem.</p>
+        <div class="kicker" style="font-size:11px;letter-spacing:2px;text-transform:uppercase;margin-bottom:10px;">Pro firmy</div>
+        <h3>Kdy nás potřebujete</h3>
+        <p class="lead">Prověření odborníci z Leadership Network i lidé v kariérním přechodu, propojení s reálnou poptávkou firem.</p>
         <div class="n1-cols">
           <div class="n1-col"><i>◆</i><b>Firmy v transformaci</b><span>Reorganizace, digitalizace, turnaround. Interim kapacity na měsíce, ne na inzeráty.</span></div>
           <div class="n1-col"><i>◆</i><b>Mid-size firmy</b><span>100–1000 zaměstnanců bez velkého HR týmu. Expert na míru bez zdlouhavého náboru.</span></div>
           <div class="n1-col"><i>◆</i><b>Startupy a scale-upy</b><span>Fractional CTO/CFO/CHRO — seniorní know-how na částečný úvazek.</span></div>
           <div class="n1-col"><i>◆</i><b>Firmy propouštějící</b><span>Dostupný outplacement: vaši lidé mají práci, rozvoj i podporu dřív, než najdou novou roli.</span></div>
         </div>
-      </div>
-
-      <!-- Sekce: 4krokový proces (od poptávky k expertovi) -->
-      <div class="n1-sec" id="sec-funguje" style="background:#f6f4ef;">
-        <h3>Jak spolupracujeme s firmami</h3>
-        <p class="lead">Čtyři kroky od poptávky k expertovi. Bez procházení databází a bez aukcí — po úvodní konzultaci vám představíme kandidáty na míru.</p>
+        <h4 class="sub-h">Jak spolupracujeme</h4>
+        <p class="lead">Čtyři kroky od poptávky k expertovi. Bez procházení databází a bez aukcí.</p>
         <div class="n1-steps">
           <div class="n1-step"><i>01</i><b>Zadáte poptávku</b><span>Krátká konzultace (30 min) nebo formulář. Zdarma a nezávazně.</span></div>
           <div class="n1-step"><i>02</i><b>Prověříme a spárujeme</b><span>Osobní konzultant vybere experty dle kompetenční matice vašeho oboru.</span></div>
           <div class="n1-step"><i>03</i><b>Dostanete výběr expertů</b><span>Několik profilů s referencemi a výsledky — ne 500 výsledků.</span></div>
           <div class="n1-step"><i>04</i><b>Průběžná péče</b><span>Konzultant zůstává v kontaktu po celou dobu spolupráce. Když něco nesedí, hledáme řešení hned.</span></div>
         </div>
+        <div class="inline-cta"><span class="a" onclick="jump(0,'sec-poptavka')">Zadat poptávku</span><span class="b" onclick="jump(0,'sec-ceny')">Tržiště služeb ↓</span></div>
       </div>
 
-      <!-- Katalog odborníků je skrytý do fáze 3 (rozhodnutí č. 5). -->
-
-      <!-- Sekce: ceník dle schváleného modelu PeopleSphere™ (v1.2 — service fees místo předplatného) -->
-      <!-- Sekce: Tržiště služeb — struktura ceníku bez čísel; konkrétní ceny na vyžádání -->
-      <div class="n1-sec" id="sec-ceny" style="background:#f6f4ef;">
-        <h3>Tržiště služeb</h3>
-        <p class="lead">Zaplatíte jen to, co skutečně využijete — transparentní service fee, kandidáti bez vstupních poplatků. Konkrétní ceník zasíláme na vyžádání.</p>
-        <div class="n1-cols" style="grid-template-columns:repeat(3,1fr);">
-          <div class="n1-col" style="background:#fff;">
-            <i>◆</i><b>Firmy &amp; outplacement</b>
-            <span style="margin-bottom:8px;">Vstup kandidáta do programu<br>Roční firemní přístup k poolu<br>Success fee z umístění<br>WorkHub™ úkoly pro vaše lidi</span>
-            <span class="btn o" style="margin-top:10px;" onclick="jump(0,'sec-poptavka',1)">Vyžádat ceník</span>
-          </div>
-          <div class="n1-col" style="background:#0e2723;color:#f3efe6;border-color:#0e2723;">
-            <i style="color:#c9a86a;">◆</i><b style="color:#f3efe6;">Interim &amp; expertní role</b>
-            <span style="color:#b9c7c0;margin-bottom:8px;">Interim mandáty a shadow management<br>Mentoring, koučink, projektové role<br>Stáže — sazby vždy nad minimální mzdou<br>Fee platí zadavatel, ne expert</span>
-            <span style="color:#9fb2aa;">Sazby expertů dle oboru a rozsahu — transparentně před podpisem</span>
-            <span class="btn" style="margin-top:10px;" onclick="jump(0,'sec-poptavka',1)">Vyžádat ceník</span>
-          </div>
-          <div class="n1-col" style="background:#fff;">
-            <i>◆</i><b>Agentury &amp; recruiteři</b>
-            <span style="margin-bottom:8px;">Roční licence agentury i recruiters<br>Odběr kandidátů ze sdíleného poolu<br>WorkHub™ fee z krátkých zakázek<br>Transparentní pravidla spolupráce</span>
-            <span class="btn o" style="margin-top:10px;" onclick="jump(0,'sec-poptavka',1)">Vyžádat ceník</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- FAQ: nativní <details> – první otázka je předem rozbalená -->
-      <div class="n1-sec" id="sec-faq">
-        <h3>Časté otázky</h3>
-        <div class="n1-faq">
-          <details open><summary>Je to bezpečné? Neriskujeme švarcsystém?</summary><p>Expert vystupuje jako OSVČ/s.r.o. na vlastní smlouvu s vámi. TalentStone zprostředkovává a poskytuje smluvní šablony. Smluvní model před ostrým spuštěním posoudí právník.</p></details>
-          <details><summary>Co když expert nevyhovuje?</summary><p>Řešíme to hned s vaším konzultantem a hledáme náhradu nebo jiné řešení. Každý engagement hodnotí obě strany, hodnocení buduje vzájemnou pověst.</p></details>
-          <details><summary>Čím se lišíte od job portálů?</summary><p>Neprodáváme inzeráty, prodáváme výsledek: výběr prověřených kandidátů na míru. Job portály vám dají 500 výsledků k filtrování — my uděláme výběr za vás.</p></details>
-          <details><summary>Jak prověřujete odborníky?</summary><p>Pět kroků: identita a oprávnění, dvě ověřené reference z posledních tří let, kompetenční rozhovor dle oborové matice, doložitelné portfolio a výsledky, roční recertifikace. Do sítě nepřijímáme každého — pečlivý výběr buduje důvěru.</p></details>
-          <details><summary>Jsem odborník. Co mi to dává?</summary><p>Zdarma: důstojný profil, poptávky na míru vašim kompetencím, doporučené sazby dle oboru a férové podmínky bez aukcí. Service fee z mandátů platí zadavatel, ne vy.</p></details>
-          <details><summary>Ztratil jsem práci / čeká mě propuštění. Jak se zapojím?</summary><p>Vstupujete přes ověřeného partnera — vašeho (bývalého) zaměstnavatele, personální agenturu nebo recruitera, který vstup hradí. Program zahrnuje poradenské konzultace PsyCare™ (hradí partner programu), WorkHub™ mikroúkoly s odměnou a rekvalifikační programy CareerShift Academy™. Změna zaměstnání není krize – je to restart.</p></details>
-        </div>
-      </div>
-
-      <!-- ===== SEKCE: KANDIDÁTI V KARIÉRNÍM PŘECHODU (PeopleSphere™ program) ===== -->
-      <div class="n1-sec" id="sec-kandidati" style="background:#fff;">
-        <div class="kicker" style="font-size:11px;letter-spacing:2px;color:#c9a86a;text-transform:uppercase;margin-bottom:10px;font-family:system-ui;">PeopleSphere™ program</div>
+      <!-- 4) KARIÉRNÍ PŘECHOD: PeopleSphere™ + WorkHub™ v jedné sekci -->
+      <div class="n1-sec" id="sec-kandidati" style="background:#f6f4ef;">
+        <div class="kicker" style="font-size:11px;letter-spacing:2px;text-transform:uppercase;margin-bottom:10px;">PeopleSphere™ program</div>
         <h3>Ztráta práce není ztráta hodnoty.</h3>
-        <p class="lead">Lidé v kariérním přechodu u nás nezůstávají pasivní: dostávají <b>práci (WorkHub™), rozvoj (CareerShift Academy™) a poradenskou podporu (PsyCare™)</b> — a každý den je vede blíž k nové roli. Vstup přes ověřeného partnera: zaměstnavatele, personální agenturu nebo recruitera.</p>
+        <p class="lead">Lidé v kariérním přechodu dostávají <b>práci (WorkHub™), rozvoj (CareerShift Academy™) a poradenskou podporu (PsyCare™)</b>. Vstup přes ověřeného partnera: zaměstnavatele, personální agenturu nebo recruitera.</p>
         <div class="n1-cols" style="grid-template-columns:repeat(3,1fr);">
           <div class="n1-col"><i>◆</i><b>Firmy propouštějící</b><span>Dostupný outplacement místo drahé klasické varianty. Vaši lidé dostanou práci, rozvoj i podporu. Prestiž: postaráte se o své lidi.</span></div>
           <div class="n1-col"><i>◆</i><b>Lidé v kariérním přechodu</b><span>Pracovní rytmus bez vyhoření: placené mikroúkoly, rekvalifikace na AI profese, poradenské konzultace. „Změna zaměstnání není krize – je to restart."</span></div>
@@ -622,23 +672,51 @@
           <div class="n1-step"><i>04</i><b>Práce a rozvoj</b><span>WorkHub™ úkoly + CareerShift Academy™ (AI reskilling).</span></div>
           <div class="n1-step"><i>05</i><b>Umístění</b><span>Nová práce, projekt — nebo role mentora pro další kandidáty.</span></div>
         </div>
-        <div style="margin-top:24px;font-family:system-ui;font-size:12.5px;color:#6a736e;background:#f6f4ef;border-radius:10px;padding:14px 18px;">
-          <b style="color:#0e2723;">Chcete se postarat o své propouštěné?</b> Vstup kandidátů hradíte vy jako partner — konkrétní ceník zašleme na vyžádání. <span class="btn o" style="cursor:pointer;" onclick="jump(0,'sec-poptavka',1)">Poptat outplacement</span>
+        <h4 class="sub-h">WorkHub™: práce, která drží v rytmu</h4>
+        <p class="lead">Mikroúkoly, krátkodobé projekty a testovací zakázky od partnerských firem, vždy za odměnu nad minimální mzdou. Kandidáti neztrácejí kompetence a partneři vidí reálný výkon.</p>
+        <div style="margin-top:24px;font-family:var(--ff);font-size:12.5px;color:#5c6875;background:#eef1f4;border-radius:10px;padding:14px 18px;">
+          <b style="color:#2c3e50;">Chcete se postarat o své propouštěné?</b> Vstup kandidátů hradíte vy jako partner — konkrétní ceník zašleme na vyžádání. <span style="color:#b3151e;text-decoration:underline;cursor:pointer;font-weight:600;white-space:nowrap;" onclick="jump(0,'sec-poptavka')">Poptat outplacement →</span>
         </div>
       </div>
 
-      <!-- ===== SEKCE: WORKHUB™ (mikroúkoly a projekty) ===== -->
-      <div class="n1-sec" id="sec-workhub" style="background:#f6f4ef;">
-        <h3>WorkHub™ — práce, která drží v rytmu</h3>
-        <p class="lead">Mikroúkoly, krátkodobé projekty a testovací zakázky od partnerských firem. Kandidáti neztrácejí kompetence ani sebevědomí — a partneři dostávají ověřené profily s reálným výkonem.</p>
-        <div class="n1-steps" style="grid-template-columns:repeat(4,1fr);">
-          <div class="n1-step"><i>◆</i><b>Partner zadá úkol</b><span>Research, data práce, administrativa, korektury, odborné úkoly. Placené od partnerských firem.</span></div>
-          <div class="n1-step"><i>◆</i><b>Aplikace spáruje</b><span>Doporučí kandidáty podle času, skills a vytíženosti (SkillMatrix™).</span></div>
-          <div class="n1-step"><i>◆</i><b>Kandidát dodá</b><span>Férová odměna za dodaný úkol — hodinová sazba vždy nad minimální mzdou.</span></div>
-          <div class="n1-step"><i>◆</i><b>Reputace roste</b><span>Feedback + hodnocení kvality, rychlosti a komunikace. Vstupní brána k větším projektům.</span></div>
+      <!-- 5) TRŽIŠTĚ SLUŽEB -->
+      <div class="n1-sec" id="sec-ceny" style="background:#f6f4ef;">
+        <h3>Tržiště služeb</h3>
+        <p class="lead">Zaplatíte jen to, co skutečně využijete — transparentní service fee, kandidáti bez vstupních poplatků. Konkrétní ceník zasíláme na vyžádání.</p>
+        <div class="n1-cols" style="grid-template-columns:repeat(3,1fr);">
+          <div class="n1-col" style="background:#fff;">
+            <i>◆</i><b>Firmy &amp; outplacement</b>
+            <span style="margin-bottom:8px;">Vstup kandidáta do programu<br>Roční firemní přístup k poolu<br>Success fee z umístění<br>WorkHub™ úkoly pro vaše lidi</span>
+            <span class="btn o" style="margin-top:10px;" onclick="jump(0,'sec-poptavka')">Vyžádat ceník</span>
+          </div>
+          <div class="n1-col" style="background:#2c3e50;color:#f0f3f6;border-color:#2c3e50;">
+            <i style="color:#ff9299;">◆</i><b style="color:#f0f3f6;">Interim &amp; expertní role</b>
+            <span style="color:#c6ced6;margin-bottom:8px;">Interim mandáty a shadow management<br>Mentoring, koučink, projektové role<br>Stáže — sazby vždy nad minimální mzdou<br>Fee platí zadavatel, ne expert</span>
+            <span style="color:#b8c2cc;">Sazby expertů dle oboru a rozsahu — transparentně před podpisem</span>
+            <span class="btn" style="margin-top:10px;" onclick="jump(0,'sec-poptavka')">Vyžádat ceník</span>
+          </div>
+          <div class="n1-col" style="background:#fff;">
+            <i>◆</i><b>Agentury &amp; recruiteři</b>
+            <span style="margin-bottom:8px;">Roční licence agentury i recruiters<br>Odběr kandidátů ze sdíleného poolu<br>WorkHub™ fee z krátkých zakázek<br>Transparentní pravidla spolupráce</span>
+            <span class="btn o" style="margin-top:10px;" onclick="jump(0,'sec-poptavka')">Vyžádat ceník</span>
+          </div>
         </div>
       </div>
 
+      <!-- 6) FAQ -->
+      <div class="n1-sec" id="sec-faq">
+        <h3>Časté otázky</h3>
+        <div class="n1-faq">
+          <details open><summary>Je to bezpečné? Neriskujeme švarcsystém?</summary><p>Expert vystupuje jako OSVČ/s.r.o. na vlastní smlouvu s vámi. TalentStone zprostředkovává a poskytuje smluvní šablony. Smluvní model před ostrým spuštěním posoudí právník.</p></details>
+          <details><summary>Co když expert nevyhovuje?</summary><p>Řešíme to hned s vaším konzultantem a hledáme náhradu nebo jiné řešení. Každý engagement hodnotí obě strany, hodnocení buduje vzájemnou pověst.</p></details>
+          <details><summary>Čím se lišíte od job portálů?</summary><p>Neprodáváme inzeráty, prodáváme výsledek: výběr prověřených kandidátů na míru. Job portály vám dají 500 výsledků k filtrování — my uděláme výběr za vás.</p></details>
+          <details><summary>Jak prověřujete odborníky?</summary><p>Pět kroků: identita a oprávnění, dvě ověřené reference z posledních tří let, kompetenční rozhovor dle oborové matice, doložitelné portfolio a výsledky, roční recertifikace. Do sítě nepřijímáme každého — pečlivý výběr buduje důvěru.</p></details>
+          <details><summary>Jsem odborník. Co mi to dává?</summary><p>Zdarma: důstojný profil, poptávky na míru vašim kompetencím, doporučené sazby dle oboru a férové podmínky bez aukcí. Service fee z mandátů platí zadavatel, ne vy.</p></details>
+          <details><summary>Ztratil jsem práci / čeká mě propuštění. Jak se zapojím?</summary><p>Vstupujete přes ověřeného partnera — vašeho (bývalého) zaměstnavatele, personální agenturu nebo recruitera, který vstup hradí. Program zahrnuje poradenské konzultace PsyCare™ (hradí partner programu), WorkHub™ mikroúkoly s odměnou a rekvalifikační programy CareerShift Academy™. Změna zaměstnání není krize – je to restart.</p></details>
+        </div>
+      </div>
+
+      <!-- 7+8) FORMULÁŘE -->
       <!-- ===== PŘIHLÁŠKA ODBORNÍKA: Tally formulář db02dz ===== -->
       <div class="n1-sec" id="sec-prihlaska" style="background:#fff;">
         <h3 style="text-align:center;">Požádat o prověření</h3>
@@ -659,8 +737,7 @@
         <p class="tally-fallback">Formulář se nenačetl? <a href="https://tally.so/r/kbG7Qj" target="_blank" rel="noopener">Otevřete ho v novém okně</a>.</p>
       </div>
 
-      <!-- ===== SEKCE „HLAVIČKA CORNERSTONE" – inspirována stránkou Cornerstone Prague
-           (struktura: úvod → specializace → kontakt), moderně zjednodušená pro TalentStone ===== -->
+      <!-- 9) CORNERSTONE + slovo zakladatele -->
       <div class="n1-sec" id="sec-cornerstone" style="background:#fff;">
         <div class="cs-strip">
           <div class="cs-left">
@@ -688,25 +765,18 @@
             <div class="cs-mark"><svg class="cs-logo" viewBox="0 0 348 36" role="img" aria-label="Cornerstone"><use href="#cs-logo"/></svg></div>
           </div>
         </div>
-      </div>
-
-      <!-- Sekce: reference — velké citáty (inspirace Happydance) -->
-      <div class="n1-sec" id="sec-reference" style="background:#f6f4ef;">
-        <h3>Slova těch, kteří síť tvoří</h3>
-        <p class="lead">Zakladatel ručí jménem Cornerstone, členové sítě zkušeností ze svých dalších kapitol.</p>
-        <div class="n1-quotes">
+        <div class="n1-quotes cs-quote" style="grid-template-columns:minmax(0,640px);">
           <div class="n1-q">
             <p>Důvěra je jediná měna, která se nedá zrychlit. Proto každého odborníka v síti známe osobně — a za každého z nich ručíme.</p>
             <div class="who"><b>Radim Koberský</b><span>zakladatel, Cornerstone Prague</span></div>
           </div>
         </div>
-        <div class="demo-note">Reference členů sítě doplníme po prvních spolupracích (se souhlasem).</div>
       </div>
 
-      <!-- Finální CTA sekce -->
+      <!-- Závěrečná výzva: stejná hlavní akce jako v hlavičce -->
       <div class="n1-cta-sec">
         <div><h3>Vaše zkušenosti jsou příliš cenné na to, aby zůstaly nevyužité.</h3><p>Připojte se k Leadership Network. Konkrétní podmínky a ceník zašleme na vyžádání.</p></div>
-        <span class="n1-cta a" style="display:inline-block;" onclick="jump(0,'sec-prihlaska')">Připojit se k síti</span>
+        <div class="inline-cta"><span class="a" onclick="jump(0,'sec-prihlaska')">Připojit se k síti</span><span class="b" onclick="jump(0,'sec-poptavka')">Zadat poptávku</span></div>
       </div>
 
       <!-- Patička: značka + „by Cornerstone" s logem, pak právní text a odkazy -->
@@ -719,7 +789,7 @@
           <span style="display:block;margin-top:10px;">© 2026 TalentStone · služba hlavičky Cornerstone · Nad Akáty 1607/6, Praha 4 · IČO: doplníme · testovací verze</span>
         </div>
         <!-- Odkazy v patičce skrolují na příslušné sekce N1 (obrazovka 0) -->
-        <span class="foot-links"><span onclick="jump(0,'sec-odbornici')">Odborníci</span> · <span onclick="jump(0,'sec-kandidati')">Lidé v kariérním přechodu</span> · <span onclick="jump(0,'sec-workhub')">WorkHub™</span> · <span onclick="jump(0,'sec-poptavka',1)">Pro firmy</span> · <span onclick="jump(0,'sec-ceny')">Tržiště služeb</span> · <a href="zpco.html" style="color:inherit;">Soukromí a GDPR</a> · <span onclick="jump(0,'sec-cornerstone')">Stojí za námi</span> · <span onclick="jump(0,'sec-poptavka',1)">Kontakt</span></span>
+        <span class="foot-links"><span onclick="jump(0,'sec-odbornici')">Odborníci</span> · <span onclick="jump(0,'sec-firmy')">Pro firmy</span> · <span onclick="jump(0,'sec-kandidati')">Kariérní přechod</span> · <span onclick="jump(0,'sec-ceny')">Tržiště služeb</span> · <a href="zpco.html" style="color:inherit;">Soukromí a GDPR</a> · <span onclick="jump(0,'sec-cornerstone')">Stojí za námi</span> · <span onclick="jump(0,'sec-cornerstone')">Kontakt</span></span>
       </div>
 <script>
 
@@ -734,7 +804,13 @@
   // 1) plynule odroluje na sekci s daným id,
   // 2) resetForm=1 vrátí 3krokový formulář poptávky na krok 0.
   // (Parametr i zůstává kvůli dřívějším odkazům v HTML, ale ignoruje se.)
+  function toggleNav(btn) {
+    var top = document.querySelector('.n1-top');
+    var open = top.classList.toggle('open');
+    btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+  }
   function jump(i, id, resetForm) {
+    var top = document.querySelector('.n1-top'); if (top) top.classList.remove('open');
     // Malé zpoždění, aby skrolování navázalo na případné resetování formuláře.
     setTimeout(() => {
       const el = document.getElementById(id);
@@ -829,8 +905,8 @@
         '<div class="g-title">Rychlý průvodce</div>' +
         '<div class="g-sub">Vyberte, co vás zajímá — dovedeme vás přímo tam.</div>' +
         '<a data-go="sec-prihlaska" data-reset=""><b>→</b>Chci se připojit k síti</a>' +
-        '<a data-go="sec-poptavka" data-reset="1"><b>→</b>Hledám experty pro firmu</a>' +
-        '<a data-go="sec-proc"><b>→</b>Proč se připojit?</a>' +
+        '<a data-go="sec-firmy"><b>→</b>Hledám experty pro firmu</a>' +
+        '<a data-go="sec-odbornici"><b>→</b>Co síť nabízí odborníkům?</a>' +
         '<a data-go="sec-provereni"><b>→</b>Jak probíhá prověření?</a>' +
         '<a data-go="sec-ceny"><b>→</b>Kolik co stojí? (ceník na vyžádání)</a>' +
       '</div>';
@@ -925,6 +1001,31 @@
         });
       }, { threshold: 0.12 });
       cio.observe(card);
+    });
+  })();
+
+  // ===== ANIMACE (19. 11.) =====
+  (function () {
+    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    // hlavička: třída .scrolled po odjetí z vrcholu
+    var top = document.querySelector('.n1-top');
+    function onS() { if (top) top.classList.toggle('scrolled', window.scrollY > 40); }
+    window.addEventListener('scroll', onS, { passive: true }); onS();
+    if (reduce) return;
+    // claim po slovech
+    var h2 = document.querySelector('.n1-hero > h2');
+    if (h2) {
+      var words = h2.textContent.trim().split(/\s+/);
+      h2.innerHTML = words.map(function (w, i) { return '<span class="w" style="--i:' + i + '">' + w + '</span>'; }).join(' ');
+      h2.classList.add('split');
+    }
+    // světlo pod kurzorem na kartách rozcestníku
+    document.querySelectorAll('.route a').forEach(function (a) {
+      a.addEventListener('pointermove', function (e) {
+        var r = a.getBoundingClientRect();
+        a.style.setProperty('--mx', (e.clientX - r.left) + 'px');
+        a.style.setProperty('--my', (e.clientY - r.top) + 'px');
+      });
     });
   })();
 </script>
