@@ -1,0 +1,932 @@
+<!doctype html>
+<!-- Finální verze webu TalentStone — jediná stránka, téma „Hory a nebe" v4.
+     Hlavní logotyp: 01 HŘEBEN. Varianta „bílý uzel, červený kámen" je držena
+     v záloze — vektor zůstává v defs (#cs-knot), ale nikde se nezobrazuje.
+     Struktura: hlavička → hero → trust bar → odborníci (5 pilířů) → prověření →
+     firmy → proces → katalog expertů → tržiště služeb → FAQ → kariérní přechod →
+     WorkHub™ → přihláška → poptávkový formulář → Cornerstone → reference →
+     finální CTA → patička.
+     Respektuje prefers-reduced-motion. Bez cen — ceník na vyžádání.
+     TESTOVACÍ VERZE pro talentstone.koboffice.cz (18. 11. 2026): noindex, Tally embedy,
+     katalog skrytý, zmírněná tvrzení. -->
+<html lang="cs">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="robots" content="noindex, nofollow" />
+<title>TalentStone — Your Experience. Your Next Opportunity. (testovací verze)</title>
+<style>
+  /* Serif jako výchozí písmo = prémiový "adult" tón dle Brand Key */
+  :root { font-family: Georgia, 'Times New Roman', serif; color: #1a1a1a; }
+  /* Reset okrajů + jednotný box-sizing pro všechny prvky */
+  * { box-sizing: border-box; margin: 0; }
+  body { background: #eef1f4; }
+  /* ===== N1: "Solidní kámen" – zkrácená verze (Toptal/Russell Reynolds insp.) ===== */
+  /* Tmavá grafitová hlavička + mosazný akcent #c9a86a = vizuální identita dle Brand Key */
+  .n1-top { background: #0e2723; color: #f3efe6; padding: 26px 34px; font-family: system-ui, sans-serif; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 1100; box-shadow: 0 4px 18px rgba(20,30,40,.22); }
+  /* Sticky hlavička nesmí překrývat začátek cílové sekce po skoku */
+  [id^="sec-"] { scroll-margin-top: 104px; }
+  /* Úzké obrazovky: navigace se zalamuje, hlavička zůstává kompaktní */
+  @media (max-width: 900px) {
+    .n1-top { flex-wrap: wrap; row-gap: 10px; padding: 14px 20px; }
+  }
+  .n1-logo { font-family: Georgia, serif; font-size: 19px; letter-spacing: .5px; }
+  .n1-logo span { color: #c9a86a; } /* "Stone" v mosazné barvě */
+  .n1-nav { display: flex; gap: 22px; font-size: 13px; color: #cfd8d3; }
+  .n1-nav b { color: #fff; } /* aktivní položka navigace zvýrazněná */
+  .n1-btn { background: #c9a86a; color: #0e2723; font-weight: 600; padding: 9px 18px; border-radius: 6px; font-size: 13px; }
+  /* Hero s jemným svislým gradientem – hloubka, ne plochá barva */
+  .n1-hero { padding: 64px 34px 54px; background: linear-gradient(180deg, #0e2723, #143a33); color: #f3efe6; }
+  .n1-hero h2 { font-family: Georgia, serif; font-size: 38px; max-width: 620px; line-height: 1.15; }
+  .n1-hero p { font-family: system-ui, sans-serif; font-size: 15px; color: #b9c7c0; max-width: 520px; margin: 16px 0 26px; }
+  .n1-cta { display: flex; gap: 12px; font-family: system-ui, sans-serif; }
+  .n1-cta .a { background: #c9a86a; color: #0e2723; font-weight: 600; padding: 12px 22px; border-radius: 6px; font-size: 14px; }
+  .n1-cta .b { border: 1px solid #6f8a80; color: #e7e2d5; padding: 12px 22px; border-radius: 6px; font-size: 14px; } /* sekundární CTA – obrys */
+  .n1-stats { display: flex; gap: 40px; margin-top: 38px; font-family: system-ui, sans-serif; flex-wrap: wrap; }
+  .n1-stats div b { font-family: Georgia, serif; font-size: 26px; color: #c9a86a; display: block; }
+  .n1-stats div span { font-size: 12px; color: #9fb2aa; }
+  /* Trust bar pod hero – bílé pozadí, mosazná linka nahoře */
+  .n1-trust { background: #fff; padding: 22px 34px; font-family: system-ui, sans-serif; font-size: 12.5px; color: #555; border-top: 3px solid #c9a86a; display: flex; gap: 26px; align-items: center; flex-wrap: wrap; }
+  .n1-badge { display: inline-flex; align-items: center; gap: 6px; color: #0e2723; font-weight: 600; }
+
+  /* ===== N1 KOMPLETNÍ WEB – sekce rozšířené stránky ===== */
+  /* (Duplicitní .n1-* pravidla výše pokrývají hlavičku/hero; níže jsou sekce navíc.) */
+  .n1-sec { padding: 50px 34px; } /* standardní svislý rytmus sekcí */
+  .n1-sec h3 { font-family: Georgia, serif; font-size: 26px; color: #0e2723; margin-bottom: 8px; }
+  .n1-sec .lead { color: #66706c; font-size: 14px; margin-bottom: 26px; max-width: 640px; }
+  /* 4sloupcová mřížka cílových segmentů */
+  .n1-cols { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+  .n1-col { border: 1px solid #e5e2da; border-radius: 10px; padding: 18px; }
+  .n1-col i { font-style: normal; color: #c9a86a; font-family: Georgia, serif; font-size: 22px; display: block; margin-bottom: 8px; } /* ◆ = kamenný motiv */
+  .n1-col b { display: block; color: #0e2723; font-size: 14px; margin-bottom: 5px; }
+  .n1-col span { font-size: 12px; color: #6a736e; line-height: 1.5; display: block; }
+  /* Tlačítka uvnitř karet segmentů (ceník v1.2) – původní .btn je scoped na .n1-plan */
+  .n1-col .btn { display: inline-block; margin-top: 14px; background: #c9a86a; color: #0e2723; font-weight: 600; padding: 10px 18px; border-radius: 6px; font-size: 13px; cursor: pointer; }
+  .n1-col .btn.o { background: none; border: 1px solid #c9a86a; color: #8a6d2f; }
+  /* 4 kroky procesu – čísla 01–04 velkým serifem */
+  .n1-steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; counter-reset: step; }
+  .n1-step { position: relative; background: #f6f4ef; border-radius: 10px; padding: 18px; }
+  .n1-step i { font-style: normal; font-family: Georgia, serif; font-size: 30px; color: #d8cba8; display: block; }
+  .n1-step b { display: block; color: #0e2723; margin: 6px 0 4px; font-size: 13.5px; }
+  .n1-step span { font-size: 12px; color: #6a736e; }
+  /* Katalog prověřených expertů – 3 karty */
+  .n1-experts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .n1-exp { border: 1px solid #e5e2da; border-radius: 10px; padding: 18px; }
+  .n1-exp .av { width: 44px; height: 44px; border-radius: 50%; background: #0e2723; color: #f4d9a6; display: flex; align-items: center; justify-content: center; font-weight: 700; margin-bottom: 10px; }
+  .n1-exp b { display: block; color: #0e2723; font-size: 14px; }
+  .n1-exp span { display: block; font-size: 12px; color: #6a736e; margin: 3px 0 8px; }
+  .n1-ver { font-size: 10.5px; color: #8a6d2f; background: #f4ead2; padding: 3px 9px; border-radius: 10px; display: inline-block; } /* badge "Prověřený" */
+  /* Cenové tarify – 2 sloupce, Pro je tmavý (doporučený) */
+  .n1-price { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; max-width: 760px; }
+  .n1-plan { border: 1px solid #e5e2da; border-radius: 12px; padding: 22px; }
+  .n1-plan.pro { background: #0e2723; color: #f3efe6; border-color: #0e2723; }
+  .n1-plan b { font-family: Georgia, serif; font-size: 18px; display: block; }
+  .n1-plan .p { font-family: Georgia, serif; font-size: 30px; margin: 8px 0 2px; }
+  .n1-plan .p small { font-size: 12px; font-family: system-ui; color: #9fb2aa; }
+  .n1-plan ul { list-style: none; padding: 12px 0 0; margin: 0; }
+  .n1-plan li { font-size: 12.5px; padding: 4px 0; color: inherit; opacity: .92; }
+  .n1-plan li::before { content: "◆ "; color: #c9a86a; font-size: 10px; } /* odrážka jako kamínek */
+  .n1-plan .btn { display: inline-block; margin-top: 14px; background: #c9a86a; color: #0e2723; font-weight: 600; padding: 10px 18px; border-radius: 6px; font-size: 13px; }
+  .n1-plan .btn.o { background: none; border: 1px solid #c9a86a; color: #c9a86a; } /* outline varianta tlačítka */
+  .n1-plan .tag { font-size: 11px; background: #c9a86a; color: #0e2723; padding: 2px 10px; border-radius: 10px; margin-left: 8px; vertical-align: middle; }
+  /* FAQ – nativní <details> = rozbalovací otázky bez JS */
+  .n1-faq { max-width: 720px; }
+  .n1-faq details { border-bottom: 1px solid #e5e2da; padding: 12px 0; }
+  .n1-faq summary { font-weight: 600; color: #0e2723; font-size: 14px; cursor: pointer; }
+  .n1-faq p { font-size: 13px; color: #6a736e; margin: 8px 0 0; line-height: 1.6; }
+  /* Finální CTA sekce + patička */
+  .n1-cta-sec { background: #0e2723; color: #f3efe6; padding: 46px 34px; display: flex; justify-content: space-between; align-items: center; gap: 20px; flex-wrap: wrap; }
+  .n1-cta-sec h3 { font-family: Georgia, serif; font-size: 24px; max-width: 520px; }
+  .n1-cta-sec p { font-size: 13px; color: #b9c7c0; margin-top: 6px; }
+  .n1-foot { background: #0a1f1c; color: #8fa39b; padding: 24px 34px; font-size: 11.5px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+  /* Značkový blok: TalentStone + „by Cornerstone" + logo rodiče (bílá varianta) */
+  .n1-brand { display: flex; flex-direction: column; }
+  .n1-by { display: flex; align-items: center; gap: 8px; font-family: system-ui, sans-serif; font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; color: #9fb2aa; margin-top: 3px; }
+  .cs-logo { height: 11px; width: auto; display: inline-block; } /* bílé logo Cornerstone – jen na tmavém pozadí */
+
+  /* ===== SEKCE „HLAVIČKA CORNERSTONE" (inspirace cornerstone-group.com/offices) ===== */
+  /* Dvousloupcový layout jako na stránce kanceláře: intro + kontakt vlevo, specializace vpravo */
+  .cs-strip { display: grid; grid-template-columns: 1.1fr 1fr; gap: 40px; align-items: start; font-family: system-ui, sans-serif; }
+  .cs-left .kicker { font-size: 11px; letter-spacing: 2px; color: #c9a86a; text-transform: uppercase; margin-bottom: 10px; }
+  .cs-left h3 { font-family: Georgia, serif; font-size: 24px; color: #0e2723; margin-bottom: 8px; }
+  .cs-left .lead { font-size: 13.5px; color: #66706c; max-width: 420px; margin-bottom: 18px; }
+  .cs-left .lead b { color: #0e2723; }
+  .cs-contact { border-left: 3px solid #c9a86a; padding: 4px 0 4px 14px; font-size: 12.5px; color: #4c544f; line-height: 1.7; }
+  .cs-contact b { display: block; color: #0e2723; }
+  .cs-contact .ok { color: #1a7a4d; font-weight: 600; }
+  .cs-spec-h { font-size: 12px; letter-spacing: 1px; text-transform: uppercase; color: #8a928d; margin-bottom: 12px; }
+  /* Seznam specializací – stejný vzor jako „Our Specializations" na webu Cornerstone */
+  .cs-spec { list-style: none; padding: 0; margin: 0 0 22px; columns: 1; }
+  .cs-spec li { font-size: 12.5px; color: #4c544f; padding: 7px 0; border-bottom: 1px solid #eeeae2; }
+  .cs-spec li::before { content: "◆ "; color: #c9a86a; font-size: 9px; }
+  /* Tmavý rámeček, aby bílé logo Cornerstone na světlém pozadí fungovalo */
+  .cs-mark { background: #0e2723; border-radius: 8px; padding: 14px 18px; display: inline-block; }
+  .cs-mark .cs-logo { height: 13px; }
+  /* Patička: značka s logem nad odkazy */
+  .n1-foot .n1-brand { gap: 2px; }
+  /* Odkazy navigace a CTA jsou <span> bez <a> – kurzor ruky a hover signalizují klikatelnost */
+  .n1-nav span, .n1-btn, .n1-cta .a, .n1-cta .b, .n1-plan .btn, .n4-cta, .foot-links span { cursor: pointer; }
+  .n1-nav span:hover, .foot-links span:hover { color: #c9a86a; }
+
+  /* ===== N4: Sekce "Pro odborníky" (včleněná do N1 i jako samostatná obrazovka) ===== */
+  .n4-hero { background: linear-gradient(180deg, #143a33, #0e2723); color: #f3efe6; padding: 54px 34px; font-family: system-ui, sans-serif; }
+  .n4-hero .kicker { font-size: 12px; letter-spacing: 2px; color: #c9a86a; text-transform: uppercase; margin-bottom: 14px; }
+  .n4-hero h2 { font-family: Georgia, serif; font-size: 34px; max-width: 640px; line-height: 1.2; }
+  .n4-hero p { color: #b9c7c0; font-size: 15px; max-width: 540px; margin: 14px 0 24px; }
+  .n4-cta { display: inline-block; background: #c9a86a; color: #0e2723; font-weight: 600; padding: 12px 24px; border-radius: 6px; font-size: 14px; }
+  .n4-cta.sec { background: none; border: 1px solid #6f8a80; color: #e7e2d5; margin-left: 10px; }
+  .n4-benefits { background: #fff; padding: 40px 34px; font-family: system-ui, sans-serif; }
+  .n4-benefits h3 { font-family: Georgia, serif; font-size: 24px; color: #0e2723; margin-bottom: 22px; }
+  .n4-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; } /* 6 benefitů = mřížka 3×2 */
+  .n4-b { border: 1px solid #e5e2da; border-radius: 10px; padding: 18px; }
+  .n4-b i { font-style: normal; color: #c9a86a; font-family: Georgia, serif; font-size: 22px; display: block; margin-bottom: 8px; }
+  .n4-b b { display: block; color: #0e2723; font-size: 14px; margin-bottom: 5px; }
+  .n4-b span { font-size: 12.5px; color: #6a736e; line-height: 1.55; display: block; }
+  .n4-process { background: #f6f4ef; padding: 40px 34px; font-family: system-ui, sans-serif; }
+  .n4-process h3 { font-family: Georgia, serif; font-size: 24px; color: #0e2723; margin-bottom: 6px; }
+  .n4-process .lead { color: #66706c; font-size: 13.5px; margin-bottom: 22px; }
+  .n4-pgrid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; } /* 5 kroků prověřování vedle sebe */
+  .n4-p { background: #fff; border-radius: 10px; padding: 14px; position: relative; }
+  .n4-p i { font-style: normal; font-family: Georgia, serif; font-size: 24px; color: #d8cba8; display: block; }
+  .n4-p b { display: block; color: #0e2723; font-size: 12.5px; margin: 6px 0 3px; }
+  .n4-p span { font-size: 11px; color: #6a736e; line-height: 1.45; display: block; }
+  .n4-p .rej { font-size: 10px; color: #8a6d2f; background: #f4ead2; border-radius: 8px; padding: 2px 8px; display: inline-block; margin-top: 6px; } /* transparentní rejection rate */
+  .n4-quotes { background: #fff; padding: 40px 34px; font-family: system-ui, sans-serif; }
+  .n4-quotes h3 { font-family: Georgia, serif; font-size: 24px; color: #0e2723; margin-bottom: 22px; }
+  .n4-qgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .n4-q { background: #f6f4ef; border-radius: 10px; padding: 20px; font-size: 13px; color: #4c544f; line-height: 1.6; }
+  .n4-q b { display: block; margin-top: 10px; color: #0e2723; font-size: 12px; }
+  .n4-q i { font-style: normal; color: #c9a86a; font-family: Georgia, serif; font-size: 26px; display: block; margin-bottom: 6px; } /* ◆ jako "uvozovky" */
+  .n4-join { background: #0e2723; color: #f3efe6; padding: 44px 34px; font-family: system-ui, sans-serif; display: flex; justify-content: space-between; align-items: center; gap: 20px; flex-wrap: wrap; }
+  .n4-join h3 { font-family: Georgia, serif; font-size: 24px; max-width: 540px; }
+  .n4-join p { font-size: 13px; color: #b9c7c0; margin-top: 6px; }
+
+  /* ===== N5: ONBOARDING FLOW (3-krokový formulář poptávky) ===== */
+  /* .ob = "onboarding" – karta formuláře, centrovaná, max 760px pro čitelnost */
+  .ob { background: #fff; border-radius: 14px; overflow: hidden; box-shadow: 0 10px 40px rgba(20,30,25,.14); font-family: system-ui, sans-serif; max-width: 760px; margin: 0 auto; }
+  .ob-top { background: #0e2723; color: #f3efe6; padding: 18px 28px; display: flex; justify-content: space-between; align-items: center; }
+  .ob-top .lg { font-family: Georgia, serif; font-size: 16px; }
+  .ob-top .lg span { color: #c9a86a; }
+  /* Progress indikátory – 3 segmenty, mosazný = dokončený/aktivní (ovládá JS) */
+  .ob-steps { display: flex; gap: 8px; padding: 16px 28px 0; }
+  .ob-ind { flex: 1; height: 4px; border-radius: 2px; background: #e5e2da; }
+  .ob-ind.on { background: #c9a86a; }
+  .ob-body { padding: 26px 28px 10px; }
+  /* Jednotlivé kroky (panes) – zobrazuje se jen .on (přepíná JS) */
+  .ob-pane { display: none; }
+  .ob-pane.on { display: block; }
+  .ob-pane h3 { font-family: Georgia, serif; font-size: 21px; color: #0e2723; margin-bottom: 4px; }
+  .ob-pane .sub2 { font-size: 12.5px; color: #77807b; margin-bottom: 18px; }
+  .ob-f { margin-bottom: 14px; } /* jedno pole formuláře */
+  .ob-f label { display: block; font-size: 12px; font-weight: 600; color: #0e2723; margin-bottom: 5px; }
+  .ob-f input, .ob-f select, .ob-f textarea { width: 100%; border: 1px solid #d9d5cb; border-radius: 8px; padding: 10px 12px; font-size: 13px; font-family: system-ui; color: #333; background: #fff; }
+  .ob-f textarea { min-height: 64px; resize: vertical; }
+  .ob-row { display: flex; gap: 12px; } /* dvě pole vedle sebe */
+  .ob-row .ob-f { flex: 1; }
+  /* "Chips" = volitelné hodnoty kliknutím (typ spolupráce, obor…) */
+  .ob-chips { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 16px; }
+  .ob-chip { border: 1px solid #cfc8bd; border-radius: 16px; padding: 7px 14px; font-size: 12px; color: #444; cursor: pointer; user-select: none; }
+  .ob-chip.on { background: #0e2723; color: #f3efe6; border-color: #0e2723; } /* vybraná hodnota */
+  .ob-sum { background: #f6f4ef; border-radius: 10px; padding: 16px 18px; font-size: 12.5px; color: #4c544f; line-height: 1.8; margin-bottom: 16px; }
+  .ob-sum b { color: #0e2723; }
+  .ob-sum .ok { color: #1a7a4d; font-weight: 600; } /* zelené trust signály */
+  .ob-nav { display: flex; justify-content: space-between; padding: 14px 28px 24px; border-top: 1px solid #f0ede6; }
+  .ob-btn { background: #c9a86a; color: #0e2723; font-weight: 600; border: none; border-radius: 6px; padding: 11px 22px; font-size: 13px; cursor: pointer; }
+  .ob-btn.sec { background: none; border: 1px solid #cfc8bd; color: #666; } /* tlačítko Zpět */
+  .ob-note { font-size: 11px; color: #9aa19c; text-align: center; padding: 0 28px 18px; } /* GDPR poznámka */
+  /* ===== TÉMA „HORY A NEBE" v4 (jediné téma prezentace) =====
+     Kombinace: modrošedá hora + šedý kámen/mraky + světle šedé nebe. Bez azurových akcentů.
+     Třída .blue je trvale na .wrap; !important přebíjí inline styly sekcí. */
+  .blue body, .blue { background: #eef1f4; } /* světle šedé pozadí */
+  /* Modrošedé plochy (hora): hlavička, patička, formulářová hlavička, sekce pro odborníky, finální CTA */
+  .blue .n1-top, .blue .n1-foot, .blue .n1-cta-sec, .blue .ob-top, .blue .n4-hero, .blue .cs-mark { background: #2c3e50 !important; }
+  .blue .n1-hero { background: linear-gradient(180deg, #253546, #3c5165 70%, #5b7186) !important; } /* hora → šedé nebe */
+  .blue .n1-hero h2 { color: #f0f3f6 !important; }
+  /* Wordmarky a endorsement „by Cornerstone" ve světle šedé */
+  .blue .n1-logo span, .blue .ob-top .lg span { color: #cfd6dd !important; }
+  .blue .n1-by { color: #98a3ae !important; } /* šedý endorsement */
+  /* Nebe: světle šedé pozadí sekcí a karet */
+  .blue .n1-sec[style] { background: #f0f2f5 !important; } /* inline pozadí sekcí → světle šedé nebe */
+  .blue .n4-process { background: #e7eaef !important; }
+  .blue .n4-benefits { background: #ffffff !important; }
+  .blue .n1-step { background: #ffffff; border-color: #d6dde5; }
+  .blue .n1-step i { color: #75828f; } /* šedé ikonky kroků */
+  .blue .n1-col i { color: #3c5165 !important; } /* modrošedé ikony sloupců */
+  /* Typografie: modrošedé nadpisy + šedé texty */
+  .blue .n1-sec h3 { color: #2c3e50; }
+  .blue .n1-sec .lead { color: #5c6875; } /* šedá sekundární typografie */
+  .blue .n1-col b { color: #2c3e50; }
+  .blue .n1-col span, .blue .n1-step span { color: #5c6875; }
+  .blue .n1-faq summary { color: #2c3e50; }
+  .blue .n1-hero p, .blue .n1-stats div span { color: #c6ced6; } /* šedý text v hero */
+  .blue .n1-stats div b { color: #cfd6dd; } /* světle šedé statistiky */
+  /* Trust bar a badge: šedý rám + modrošedý text */
+  .blue .n1-trust { background: #ffffff; }
+  .blue .n1-trust .n1-badge { color: #2c3e50; }
+  /* Sekundární tlačítka: šedý outline */
+  .blue .n1-cta .b, .blue .n4-cta.sec { border-color: #7c8a98 !important; color: #dde3e8 !important; background: none !important; }
+  .blue .n1-col .btn.o { background: transparent !important; border-color: #3c5165 !important; color: #2c3e50 !important; } /* obrysová varianta: viditelný text na světlé kartě */
+  /* Tmavá karta „doporučujeme" v ceníku → nejhlubší modrošedá hory */
+  .blue .n1-col[style*="0e2723"] { background: #2c3e50 !important; border-color: #2c3e50 !important; }
+  .blue .n1-col[style*="0e2723"] { color: #e3e8ec !important; }
+  .blue .n1-col[style*="0e2723"] i { color: #98a3ae !important; }
+  .blue .n1-col[style*="0e2723"] b { color: #f0f3f6 !important; }
+  .blue .n1-col[style*="0e2723"] b[style*="c9a86a"] { color: #cfd6dd !important; }
+  .blue .n1-col[style*="0e2723"] span[style*="b9c7c0"] { color: #b8c2cc !important; }
+  .blue .n1-col[style*="0e2723"] span[style*="9fb2aa"] { color: #98a3ae !important; }
+  /* Katalog prověřených expertů: karty, avataři, badge */
+  .blue .n1-exp { border-color: #d6dde5 !important; }
+  .blue .n1-exp .av { background: #3c5165 !important; color: #e3e8ec !important; }
+  .blue .n1-exp b { color: #2c3e50; }
+  .blue .n1-exp span { color: #5c6875; }
+  /* Sekce Leadership Network (n4-hero): texty a CTA do modrošedé */
+  .blue .n4-hero { color: #e3e8ec !important; }
+  .blue .n4-hero h2 { color: #f0f3f6 !important; }
+  .blue .n4-hero p { color: #b8c2cc !important; }
+  .blue .n4-cta { background: #3c5165 !important; color: #e3e8ec !important; }
+  /* Pět pilířů, výhody, prověřování (n4-benefits, n4-process, n4-p) */
+  .blue .n4-benefits h3 { color: #2c3e50 !important; }
+  .blue .n4-b { border-color: #d6dde5 !important; }
+  .blue .n4-b i { color: #3c5165 !important; }
+  .blue .n4-b b { color: #2c3e50 !important; }
+  .blue .n4-b span { color: #5c6875 !important; }
+  .blue .n4-process h3 { color: #2c3e50 !important; }
+  .blue .n4-process .lead { color: #5c6875 !important; }
+  .blue .n4-p { background: #ffffff !important; }
+  .blue .n4-p i { color: #98a3ae !important; }
+  .blue .n4-p b { color: #2c3e50 !important; }
+  .blue .n4-p span { color: #5c6875 !important; }
+  /* Světlé karty ceníku */
+  .blue .n1-col { border-color: #d6dde5 !important; }
+  .blue .n1-col[style*="#fff"] { background: #ffffff !important; }
+  /* Onboarding formulářů: aktivní stavy v modrošedé */
+  .blue .ob-ind.on { background: #3c5165; }
+  .blue .ob-chip.on { background: #2c3e50; border-color: #2c3e50; }
+  .blue .ob-sum b { color: #2c3e50; }
+  /* Katalog N3: avataři, jména, texty a hlavička */
+  /* Finální CTA sekce a Cornerstone sekce */
+  .blue .n1-cta-sec p { color: #b8c2cc !important; }
+  .blue .cs-left h3, .blue .cs-left .lead b, .blue .cs-contact b { color: #2c3e50; }
+  .blue .cs-contact { border-left-color: #8a95a1; }
+  .blue .cs-spec li::before { color: #98a3ae !important; }
+  .blue .cs-spec li { border-bottom-color: #d6dde5 !important; }
+  .blue .cs-spec-h { color: #75828f !important; }
+  /* Kickery s inline mosazí (PeopleSphere™ program apod.) → šedé */
+  .blue .n1-sec .kicker[style*="c9a86a"] { color: #5c6875 !important; }
+  .blue .cs-left .kicker { color: #5c6875 !important; }
+  /* ===== ČERVENÝ AKCENT (Cornerstone red #e41e26 — uzel z loga v prezentaci) =====
+     Základem je téma „Hory a nebe" (modrošedá + šedá); červená proložena jen tam,
+     kde dává smysl zvýraznění: hlavní CTA, hover, badge „Prověřený“, trust bar,
+     kickery a FAQ markery. Mosaz ◆ zůstává identitou sekundárních prvků. */
+  .n1-btn, .n1-cta .a, .n4-cta, .ob-btn { background: #e41e26 !important; color: #ffffff !important; }
+  /* Sekundární (outline) varianty tlačítek zachovány: */
+  .n4-cta.sec, .ob-btn.sec { background: none !important; }
+  .n4-cta.sec { color: #e7e2d5 !important; }
+  .ob-btn.sec { color: #666 !important; }
+  /* Hover odkazů v červené (světlejší odstín kvůli tmavému pozadí): */
+  .n1-nav span:hover, .foot-links span:hover { color: #ff9299 !important; }
+  /* Trust bar: červená linka jako odkaz na červeno-modrý uzel loga Cornerstone: */
+  .n1-trust { border-top: 3px solid #e41e26 !important; }
+  /* Badge „Prověřený“ v červené: */
+  .n1-ver, .n4-p .rej { background: #fdeff0 !important; color: #b3151e !important; }
+  /* Kickery: červená na světlém pozadí, světlejší na tmavém: */
+  .cs-left .kicker, .n1-sec .kicker { color: #b3151e !important; }
+  .n4-hero .kicker { color: #ff9299 !important; }
+  /* FAQ: červené markery rozbalovacích otázek + hover: */
+  .n1-faq summary::marker { color: #e41e26; }
+  .n1-faq summary:hover { color: #b3151e !important; }
+
+  /* ===== ČERVENÁ V „HORY A NEBE" (v4 — smíření akcentů) =====
+     Červená #e41e26 zůstává akcentem i v modrošedém tématu: hlavní CTA, hover,
+     badge „Prověřený", trust bar, kickery a FAQ markery. Sekundární prvky
+     zůstávají šedé/modrošedé — červená je jen „jehla", ne základ. */
+  .blue .n1-btn, .blue .n1-cta .a, .blue .n4-cta, .blue .ob-btn, { background: #e41e26 !important; color: #ffffff !important; }
+  .blue .n4-cta.sec { background: none !important; } /* sekundární = šedý outline */
+  .blue .ob-btn.sec { background: none !important; color: #666 !important; } /* „Zpět" */
+  .blue .cs-left .kicker { color: #b3151e !important; }
+  .blue .n1-sec .kicker[style*="c9a86a"] { color: #b3151e !important; }
+  .blue .n1-col .btn { background: #3c5165 !important; color: #e3e8ec !important; } /* karty: modrošedá sekundární */
+
+  /* ===== INSPIRACE: POHYB, KTERÝ DRŽÍ POZORNOST (v duchu „hor a nebe") ===== */
+
+  /* 1) Vstupní animace hero — nadpis, text, CTA i statistiky přicházejí postupně */
+  @keyframes rvUp { from { opacity: 0; transform: translateY(26px); } to { opacity: 1; transform: none; } }
+  .n1-hero > * { opacity: 0; animation: rvUp .7s cubic-bezier(.2,.7,.25,1) forwards; position: relative; z-index: 1; }
+  .n1-hero > h2 { animation-delay: .05s }
+  .n1-hero > p { animation-delay: .2s }
+  .n1-hero > .n1-cta { animation-delay: .35s }
+  .n1-hero > .n1-stats { animation-delay: .5s }
+
+  /* 2) „Nebe" v hero — jemně se přelévající světlo nad hřebeny */
+  .blue .n1-hero { position: relative; overflow: hidden; }
+  .blue .n1-hero::before {
+    content: ""; position: absolute; inset: -20% 0 0 0; z-index: 0; pointer-events: none;
+    background:
+      radial-gradient(55% 90% at 18% 8%, rgba(143,193,238,.22), transparent 62%),
+      radial-gradient(45% 80% at 82% 14%, rgba(74,158,222,.16), transparent 58%);
+    animation: skyDrift 18s ease-in-out infinite alternate;
+  }
+  @keyframes skyDrift { from { transform: translateX(0) } to { transform: translateX(-36px) scale(1.04) } }
+
+  /* 3) Scroll-reveal — sekce vystupují z mlhy, až když přijdou do záběru.
+        Odhalení řeší animace (ne transition), takže --d zpoždění
+        nebrzdí hover efekty karet po odhalení. */
+  .rv { opacity: 0; }
+  .rv.in { animation: rvIn .6s cubic-bezier(.2,.7,.25,1) both; animation-delay: var(--d, 0ms); }
+  @keyframes rvIn { from { opacity: 0; transform: translateY(30px) } to { opacity: 1; transform: none } }
+  /* Pět pilířů / kroků vystupuje „do popředí" výraznějším skokem */
+  .n4-p.rv.in { animation-name: rvInPill; }
+  @keyframes rvInPill { from { opacity: 0; transform: translateY(46px) scale(.96) } to { opacity: 1; transform: none } }
+
+  /* 4) Karty se při najetí nadzvednou a rozsvítí červenou linku (accent z loga Cornerstone) */
+  .n4-p, .n4-b, .n1-col, .n1-exp, .n1-step, .n1-q { transition: transform .3s ease, box-shadow .3s ease, border-color .3s ease, opacity .3s ease; }
+  .n4-p:hover, .n4-b:hover, .n1-col:hover, .n1-exp:hover, .n1-step:hover, .n1-q:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 16px 30px rgba(44,62,80,.14), inset 0 3px 0 #e41e26;
+    border-color: #b9c6d2;
+  }
+
+  /* 5) Výběr textu v barvě značky */
+  .wrap ::selection { background: #e41e26; color: #fff; }
+
+  /* Respekt k nastavení „snížit pohyb" */
+  @media (prefers-reduced-motion: reduce) {
+    .n1-hero > * { animation: none; opacity: 1; }
+    .rv { opacity: 1; transform: none; }
+    .rv.in { animation: none; }
+    .blue .n1-hero::before { animation: none; }
+  }
+
+  /* ===== INSPIRACE: HŘEBEN HOR + KONVERZAČNÍ PRŮVODCE + STICKY CTA ===== */
+
+  /* 6) Silueta hřebene na spodku hero — „vrchol, ke kterému směřujeme"
+        (bílá silueta navazující na trust bar + červená vlajka na vrcholu) */
+  .n1-hero > svg.ridge { position: absolute; left: 0; right: 0; bottom: -1px; width: 100%; height: 74px; z-index: 0; display: block; }
+
+  /* 7) Plovoucí průvodce „Kde začít?" — konverzační navigace (inspirace Happydance) */
+  #guide { position: fixed; left: 18px; bottom: 18px; z-index: 1200; font-family: system-ui, sans-serif; }
+  #guideChip { display: inline-flex; align-items: center; gap: 9px; background: #2c3e50; color: #fff; border: none; border-radius: 999px; padding: 12px 18px; font-size: 13.5px; font-weight: 600; cursor: pointer; box-shadow: 0 10px 24px rgba(44,62,80,.28); transition: transform .25s ease, background .25s ease; }
+  #guideChip:hover { transform: translateY(-2px); background: #3c5165; }
+  #guideChip .dot { width: 8px; height: 8px; border-radius: 50%; background: #e41e26; box-shadow: 0 0 0 0 rgba(228,30,38,.5); animation: pulse 2.2s infinite; }
+  @keyframes pulse { 70% { box-shadow: 0 0 0 9px rgba(228,30,38,0); } 100% { box-shadow: 0 0 0 0 rgba(228,30,38,0); } }
+  #guidePanel { position: absolute; left: 0; bottom: 56px; width: 284px; background: #fff; border-radius: 12px; box-shadow: 0 18px 40px rgba(44,62,80,.25); border: 1px solid #e3e8ec; padding: 16px; opacity: 0; transform: translateY(10px) scale(.97); pointer-events: none; transition: opacity .25s ease, transform .25s ease; }
+  #guide.open #guidePanel { opacity: 1; transform: none; pointer-events: auto; }
+  #guidePanel .g-title { font-size: 11.5px; letter-spacing: 1.6px; text-transform: uppercase; color: #b3151e; font-weight: 700; margin-bottom: 4px; }
+  #guidePanel .g-sub { font-size: 12px; color: #5c6875; margin-bottom: 10px; }
+  #guidePanel a { display: block; padding: 10px 12px; border-radius: 8px; font-size: 13px; color: #2c3e50; font-weight: 600; cursor: pointer; text-decoration: none; border: 1px solid transparent; }
+  #guidePanel a:hover { background: #f0f2f5; border-color: #d6dde5; color: #b3151e; }
+  #guidePanel a b { color: #e41e26; font-weight: 700; margin-right: 7px; }
+
+  /* 8) Sticky CTA — objeví se po odscrollování z hero */
+  #stickyCta { position: fixed; right: 18px; bottom: 18px; z-index: 1200; background: #e41e26; color: #fff; border: none; border-radius: 999px; padding: 13px 22px; font-size: 13.5px; font-weight: 700; font-family: system-ui, sans-serif; cursor: pointer; box-shadow: 0 12px 28px rgba(178,21,30,.4); opacity: 0; transform: translateY(16px); pointer-events: none; transition: opacity .3s ease, transform .3s ease, background .2s ease, color .2s ease; }
+  #stickyCta.show { opacity: 1; transform: none; pointer-events: auto; }
+  #stickyCta:hover { background: #ff9299; color: #2c3e50; }
+
+  /* 9) Progress bar — tenká červená linka postupu čtení nahoře */
+  #readBar { position: fixed; top: 0; left: 0; height: 3px; width: 0; background: linear-gradient(90deg, #b3151e, #e41e26); z-index: 1300; }
+
+  @media (prefers-reduced-motion: reduce) {
+    #guideChip .dot { animation: none; }
+    #guidePanel, #stickyCta { transition: none; }
+    .jump-flash { animation: none; box-shadow: inset 0 0 0 4px #e41e26; } /* zvýraznění bez animace */
+  }
+
+  /* 10) Reference — velké citáty (inspirace Happydance: „Happy customers") */
+  .n1-quotes { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-top: 22px; }
+  .n1-q { border: 1px solid #d6dde5; border-radius: 12px; padding: 20px 22px 18px; background: #fff; position: relative; }
+  .n1-q::before { content: "„"; font-family: Georgia, serif; font-size: 52px; line-height: 1; color: #e41e26; position: absolute; top: 8px; left: 16px; }
+  .n1-q p { font-family: Georgia, serif; font-size: 15.5px; color: #2c3e50; line-height: 1.6; margin: 30px 0 14px; font-style: italic; }
+  .n1-q .who b { display: block; font-size: 13px; color: #2c3e50; font-family: system-ui, sans-serif; }
+  .n1-q .who span { font-size: 11.5px; color: #5c6875; font-family: system-ui, sans-serif; }
+  .n1-sec .demo-note { font-size: 11.5px; color: #8a95a1; font-family: system-ui, sans-serif; margin-top: 12px; font-style: italic; }
+  @media (max-width: 720px) { .n1-quotes { grid-template-columns: 1fr; } }
+
+  /* 11) Veřejný katalog prověřených odborníků — prvek N3 propojený do hlavního webu */
+  .n1-search { display: flex; gap: 10px; margin: 20px 0 6px; max-width: 500px; }
+  .n1-search input { flex: 1; padding: 11px 14px; border: 1px solid #c6ced6; border-radius: 8px; font-size: 13px; font-family: system-ui, sans-serif; outline: none; }
+  .n1-search input:focus { border-color: #e41e26; box-shadow: 0 0 0 3px rgba(228,30,38,.08); }
+  .n1-search button { background: #2c3e50; color: #fff; border: none; border-radius: 8px; padding: 11px 18px; font-size: 13px; font-weight: 600; font-family: system-ui, sans-serif; cursor: pointer; transition: background .2s ease; }
+  .n1-search button:hover { background: #3c5165; }
+  .n1-exp.hidden { display: none; }
+  .n1-count { font-size: 12px; color: #5c6875; font-family: system-ui, sans-serif; margin-top: 10px; }
+
+  /* 12) Pilíře: DYNAMICKÉ ZVÝRAZNĚNÍ — červená linka přejede kartu po odhalení,
+        číslo se za běhu počítadla rozsvítí červeně a hover rozdělí popředí od mlhy */
+  .n4-p { overflow: hidden; }
+  .n4-p::after { content: ""; position: absolute; left: 0; top: 0; height: 3px; width: 100%; background: #e41e26; transform: scaleX(0); transform-origin: left center; transition: transform .55s cubic-bezier(.2,.7,.25,1); transition-delay: var(--d, 0ms); }
+  .n4-p.in::after { transform: scaleX(1); }
+  .n4-p i { font-variant-numeric: tabular-nums; transition: color .45s ease; }
+  .n4-p i.counting { color: #b3151e !important; }
+  /* Spotlight: karta pod kurzorem vystupuje do popředí, ostatní ustoupí do mlhy */
+  .n4-pgrid:hover .n4-p:not(:hover) { opacity: .55; }
+  .n4-pgrid .n4-p:hover { transform: translateY(-8px) scale(1.02); }
+
+  /* Sekce značky: tmavá karta s bílým uzlem si drží tmavé pozadí i rám */
+  .blue .n1-col[style*="2c3e50"] { background: #2c3e50 !important; border-color: #2c3e50 !important; }
+
+  /* Odezva na kliknutí navigace/CTA: cílová sekce se krátce zvýrazní červeně
+     (viditelný feedback i v náhledech bez vnitřního skrolování) */
+  @keyframes jumpFlash { 0% { box-shadow: inset 0 0 0 4px #e41e26; } 100% { box-shadow: inset 0 0 0 4px transparent; } }
+  .jump-flash { animation: jumpFlash 1.6s ease-out 1; }
+  /* ===== TESTOVACÍ VERZE: lišta, esence, Tally ===== */
+  #testBar { background: #e41e26; color: #fff; font-family: system-ui, sans-serif; font-size: 13px; text-align: center; padding: 8px 16px; }
+  #testBar b { font-weight: 700; }
+  .n1-hero .esence { font-family: Georgia, serif; font-size: 21px; font-style: italic; color: #e3e8ec; margin: 10px 0 0; max-width: 620px; }
+  .tally-card { background: #fff; border-radius: 14px; box-shadow: 0 10px 40px rgba(20,30,25,.14); max-width: 760px; margin: 0 auto; padding: 22px 26px 10px; }
+  .tally-card iframe { display: block; width: 100%; border: 0; min-height: 420px; }
+  .tally-fallback { font-family: system-ui, sans-serif; font-size: 12.5px; color: #5c6875; text-align: center; margin-top: 12px; }
+  .tally-fallback a { color: #b3151e; }
+  @media (max-width: 600px) { .tally-card { padding: 14px 12px 6px; } }
+</style>
+</head>
+<body class="blue">
+<div id="testBar"><b>Testovací verze webu.</b> Formuláře slouží jen k testování, prosím nevyplňujte skutečné osobní údaje.</div>
+<!-- Logo Cornerstone (z nahraného souboru, bílá varianta) definované jednou jako
+     <symbol>; na místa použití se vkládá přes <use href="#cs-logo">.
+     Používat jen na tmavém pozadí – cesty mají fill white. -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><symbol id="cs-logo" viewBox="0 0 348 36"><g><path d="M47.8886 28.5341C44.2988 25.3936 43.2627 21.1452 43.2627 17.5982C43.2627 14.9012 44.0768 10.6156 47.6665 7.47514C50.5901 4.92577 54.2537 3.55884 59.6568 3.55884C64.5789 3.55884 67.6504 4.59362 69.2048 4.88895C68.9086 5.96055 68.5017 8.3987 68.5017 10.3198C66.7622 8.58357 63.5055 7.10579 59.1758 7.10579C56.1043 7.10579 54.0316 8.06617 52.5883 9.28544C50.2939 11.2806 49.5167 14.0145 49.5167 17.044C49.5167 22.9183 53.0324 28.46 61.0632 28.46C64.0237 28.46 67.0211 27.943 69.1675 26.5021C68.7975 27.6105 68.3534 30.1227 68.2055 31.3419C66.7622 31.933 63.5427 32.5244 60.3598 32.5244C55.9191 32.5244 51.5152 31.6004 47.8886 28.5341H47.8886Z" fill="white"></path><path d="M72.7188 18.2265C72.7188 11.0221 77.6036 3.55884 87.9288 3.55884C97.1064 3.55884 102.584 9.87647 102.584 17.3397C102.584 25.8002 97.0695 32.5244 87.4474 32.5244C77.0484 32.5244 72.7188 24.8026 72.7188 18.2265ZM96.3292 18.6326C96.3292 12.7216 93.2208 6.88411 86.8554 6.88411C82.4515 6.88411 78.9728 10.209 78.9728 16.97C78.9728 23.5097 82.2295 29.1251 88.5208 29.1251C91.6292 29.1251 96.3292 27.1671 96.3292 18.6326Z" fill="white"></path><path d="M108.318 14.7905C108.318 9.50727 108.207 5.59097 107.726 4.07637C108.651 4.1504 109.465 4.18722 110.39 4.18722C111.019 4.18722 114.646 4.03955 116.274 4.03955C119.568 4.03955 121.936 4.48292 123.491 5.36928C125.415 6.4777 127.117 8.58371 127.117 11.6133C127.117 14.6428 125.452 17.3027 122.566 19.113C124.675 22.1797 127.192 25.7635 129.56 28.4234C131.262 30.3445 132.373 31.4161 133.187 31.8223C132.446 32.0812 130.707 32.1548 129.338 32.1548C126.784 32.1548 125.637 31.4897 124.416 30.3077C122.233 28.2389 119.272 23.1033 117.94 21.2558C117.829 21.1081 117.68 20.9973 117.496 20.9973H113.832C113.721 20.9973 113.721 21.0345 113.721 21.1822V22.1057C113.721 26.3914 113.906 30.1228 114.165 31.9703C113.61 31.9331 112.61 31.8963 111.537 31.8963C110.427 31.8963 108.429 31.9703 107.837 32.0439C108.096 30.3445 108.318 25.948 108.318 21.293V14.7905V14.7905ZM113.721 17.0074C113.721 17.3027 113.758 17.3767 113.832 17.4135C114.535 17.6724 115.941 17.8201 117.607 17.8201C118.532 17.8201 119.161 17.6724 119.568 17.4135C120.641 16.6008 121.677 15.1971 121.677 12.9062C121.677 8.99026 118.828 7.25361 115.941 7.25361C115.016 7.25361 114.165 7.29043 113.832 7.40127C113.721 7.47529 113.721 7.54931 113.721 7.69698V17.0074Z" fill="white"></path><path d="M138.959 31.8961C138.44 31.8961 136.257 31.9702 135.887 32.0438C136.257 28.5341 136.553 11.9457 136.553 5.59082C136.553 3.70688 136.701 3.55884 136.923 3.55884C137.071 3.55884 137.404 3.7437 138.218 4.48278C142.622 8.54674 152.244 17.8939 156.759 21.6622C156.722 18.5958 156.611 9.2118 156.167 4.07623C156.574 4.15025 157.795 4.18707 158.498 4.18707C159.72 4.18707 161.311 4.07623 161.644 4.0394C161.311 6.32989 160.941 15.4554 160.978 25.2828V30.1227C160.978 32.4135 160.867 32.672 160.608 32.672C160.238 32.672 159.238 31.7853 156.389 29.1991C152.207 25.4308 146.027 19.076 140.809 14.347C140.883 21.4405 141.068 29.0883 141.512 31.9702C140.698 31.8961 139.773 31.8961 138.959 31.8961H138.959Z" fill="white"></path><path d="M169.706 14.7906C169.706 8.6946 169.483 5.22167 169.15 4.07642C169.891 4.18726 171.297 4.18726 172.555 4.18726H181.437C182.695 4.18726 184.397 4.18726 185.101 3.96558C184.952 4.77829 184.73 6.62579 184.73 8.76862C184.101 8.36207 183.176 8.14039 180.993 7.9187C179.735 7.84468 177.329 7.77104 175.368 7.77104C175.331 7.77104 175.22 7.80786 175.22 7.88188V15.2707C175.22 15.3448 175.294 15.4556 175.368 15.4556C176.256 15.4556 179.66 15.4556 180.956 15.4188C183.324 15.3448 183.953 15.1971 184.471 15.0491C184.213 16.4164 184.064 18.7437 184.101 19.8889C183.398 19.4827 182.695 19.2611 181.067 19.1502C179.882 19.0394 176.367 19.0022 175.368 19.0022C175.294 19.0022 175.22 19.0762 175.22 19.1502V20.7757C175.22 26.9088 175.294 27.8324 175.479 28.0172C175.59 28.1281 175.997 28.2389 176.367 28.2757C177.403 28.3866 178.365 28.4234 179.92 28.4234C182.88 28.4234 184.952 28.1649 186.322 27.5367C185.915 28.8668 185.508 30.8988 185.36 32.0072C185.175 32.118 184.657 32.1548 183.176 32.1548C178.217 32.1548 175.294 31.8963 172.962 31.8963C171.186 31.8963 169.891 31.9332 169.299 32.0072C169.41 30.6402 169.706 26.798 169.706 21.293V14.7905V14.7906Z" fill="white"></path><path d="M192.72 14.7905C192.72 9.50727 192.609 5.59097 192.128 4.07637C193.053 4.1504 193.867 4.18722 194.793 4.18722C195.422 4.18722 199.049 4.03955 200.677 4.03955C203.97 4.03955 206.339 4.48292 207.893 5.36928C209.817 6.4777 211.52 8.58371 211.52 11.6133C211.52 14.6428 209.855 17.3027 206.968 19.113C209.078 22.1797 211.594 25.7635 213.962 28.4234C215.665 30.3445 216.775 31.4161 217.589 31.8223C216.849 32.0812 215.11 32.1548 213.74 32.1548C211.187 32.1548 210.04 31.4897 208.818 30.3077C206.635 28.2389 203.674 23.1033 202.342 21.2558C202.231 21.1081 202.083 20.9973 201.898 20.9973H198.234C198.123 20.9973 198.123 21.0345 198.123 21.1822V22.1057C198.123 26.3914 198.308 30.1228 198.567 31.9703C198.012 31.9331 197.013 31.8963 195.94 31.8963C194.829 31.8963 192.831 31.9703 192.239 32.0439C192.498 30.3445 192.72 25.948 192.72 21.293V14.7905V14.7905ZM198.123 17.0074C198.123 17.3027 198.16 17.3767 198.234 17.4135C198.938 17.6724 200.344 17.8201 202.009 17.8201C202.934 17.8201 203.563 17.6724 203.97 17.4135C205.044 16.6008 206.08 15.1971 206.08 12.9062C206.08 8.99026 203.23 7.25361 200.344 7.25361C199.419 7.25361 198.567 7.29043 198.234 7.40127C198.123 7.47529 198.123 7.54931 198.123 7.69698V17.0074Z" fill="white"></path><path d="M219.218 25.4879C220.608 27.1027 223.338 28.9299 226.371 28.8241C229.108 28.7287 230.312 27.1712 230.244 25.2144C230.188 23.6264 229.595 22.5384 226.719 20.79L224.791 19.6372C220.443 17.0901 219.388 14.4654 219.292 11.6961C219.142 7.41302 222.419 3.71281 228.041 3.51682C229.631 3.46138 230.894 3.56548 231.899 3.71505C233.349 3.88631 234.204 3.96742 234.499 3.95712C234.404 4.40408 234.241 7.1453 234.324 9.54555C233.554 8.68513 231.643 6.97721 228.166 7.09841C225.762 7.18221 224.482 8.70551 224.542 10.4039C224.593 11.8808 225 12.902 227.686 14.5457L229.578 15.6998C234.305 18.5295 235.711 20.5875 235.822 23.7628C235.9 26.015 234.93 28.9694 232.29 30.7619C230.335 32.0501 227.87 32.506 226.169 32.5653C223.691 32.6517 220.525 32.1334 219.011 31.188C219.134 30.4814 219.323 27.4066 219.218 25.4879V25.4879Z" fill="white"></path><path d="M238.648 3.78052C239.758 4.07622 241.498 4.18707 244.902 4.18707H257.411C260.001 4.18707 262.74 4.0394 263.591 3.81772C263.221 5.40633 263.073 7.29027 263.036 8.91609C262.259 8.36188 261.001 8.10337 258.891 7.91851C257.559 7.80767 256.264 7.77084 253.34 7.77084V21.2929C253.34 25.5785 253.562 30.2335 253.747 31.9702C253.229 31.933 252.341 31.8961 251.267 31.8961C249.639 31.8961 248.381 31.933 247.419 32.0438C247.641 30.4552 247.789 25.9479 247.789 21.2929V7.77084C246.235 7.77084 245.309 7.73364 242.978 7.84448C240.165 7.99253 239.092 8.17701 237.797 8.62038C238.13 7.58598 238.537 5.03661 238.648 3.78052Z" fill="white"></path><path d="M263.997 18.2265C263.997 11.0221 268.882 3.55884 279.207 3.55884C288.385 3.55884 293.862 9.87647 293.862 17.3397C293.862 25.8002 288.348 32.5244 278.726 32.5244C268.327 32.5244 263.997 24.8026 263.997 18.2265ZM287.608 18.6326C287.608 12.7216 284.499 6.88411 278.134 6.88411C273.73 6.88411 270.251 10.209 270.251 16.97C270.251 23.5097 273.508 29.1251 279.799 29.1251C282.908 29.1251 287.608 27.1671 287.608 18.6326Z" fill="white"></path><path d="M301.188 31.8961C300.67 31.8961 298.486 31.9702 298.116 32.0438C298.486 28.5341 298.782 11.9457 298.782 5.59082C298.782 3.70688 298.93 3.55884 299.152 3.55884C299.301 3.55884 299.634 3.7437 300.448 4.48278C304.852 8.54674 314.473 17.8939 318.988 21.6622C318.951 18.5958 318.84 9.2118 318.396 4.07623C318.803 4.15025 320.024 4.18707 320.728 4.18707C321.949 4.18707 323.54 4.07623 323.873 4.0394C323.54 6.32989 323.17 15.4554 323.207 25.2828V30.1227C323.207 32.4135 323.096 32.672 322.837 32.672C322.467 32.672 321.468 31.7853 318.618 29.1991C314.437 25.4308 308.256 19.076 303.038 14.347C303.112 21.4405 303.297 29.0883 303.741 31.9702C302.927 31.8961 302.002 31.8961 301.188 31.8961Z" fill="white"></path><path d="M331.383 14.7906C331.383 8.6946 331.161 5.22167 330.828 4.07642C331.568 4.18726 332.975 4.18726 334.233 4.18726H343.115C344.373 4.18726 346.075 4.18726 346.778 3.96558C346.63 4.77829 346.408 6.62579 346.408 8.76862C345.779 8.36207 344.854 8.14039 342.67 7.9187C341.412 7.84468 339.007 7.77104 337.045 7.77104C337.008 7.77104 336.897 7.80786 336.897 7.88188V15.2707C336.897 15.3448 336.971 15.4556 337.045 15.4556C337.934 15.4556 341.338 15.4556 342.633 15.4188C345.002 15.3448 345.631 15.1971 346.149 15.0491C345.89 16.4164 345.742 18.7437 345.779 19.8889C345.076 19.4827 344.373 19.2611 342.744 19.1502C341.56 19.0394 338.045 19.0022 337.045 19.0022C336.971 19.0022 336.897 19.0762 336.897 19.1502V20.7757C336.897 26.9088 336.971 27.8324 337.156 28.0172C337.267 28.1281 337.674 28.2389 338.045 28.2757C339.081 28.3866 340.043 28.4234 341.597 28.4234C344.558 28.4234 346.63 28.1649 347.999 27.5367C347.592 28.8668 347.185 30.8988 347.037 32.0072C346.852 32.118 346.334 32.1548 344.854 32.1548C339.895 32.1548 336.971 31.8963 334.64 31.8963C332.864 31.8963 331.568 31.9332 330.976 32.0072C331.087 30.6402 331.383 26.798 331.383 21.293V14.7905V14.7906Z" fill="white"></path><path d="M29.7793 24.7991C30.7948 25.8871 31.2833 27.5328 31.2833 29.6151V29.6893C31.2833 33.6242 29.539 35.9999 25.7905 35.9999H21.1514V32.5105H25.1225C27.3864 32.5105 28.2029 31.5454 28.2029 29.6522C28.2029 28.7057 27.9988 27.9911 27.5117 27.5132" fill="white"></path><path d="M10.8708 32.5106C8.60686 32.5106 7.7904 31.5455 7.7904 29.6524C7.7904 27.7592 8.60686 26.7941 10.8708 26.7941H17.9966V23.3047H10.2028C6.45431 23.3047 4.70996 25.6804 4.70996 29.6152V29.6895C4.70996 33.6243 6.45432 36 10.2028 36H14.8419V32.5106H10.8708L10.8708 32.5106Z" fill="white"></path><path d="M32.504 25.1272C32.504 27.3916 31.539 28.2082 29.6462 28.2082C27.7534 28.2082 26.7885 27.3916 26.7885 25.1272V18H23.2998V25.7954C23.2998 29.5445 25.6751 31.2892 29.6091 31.2892H29.6833C33.6174 31.2892 35.9927 29.5445 35.9927 25.7954V21.1553H32.504V25.1272L32.504 25.1272Z" fill="white"></path><path d="M32.504 10.8727C32.504 8.60836 31.539 7.79174 29.6462 7.79174C27.7534 7.79174 26.7885 8.60836 26.7885 10.8727V17.9999H23.2998V10.2046C23.2998 6.45539 25.6751 4.71069 29.6091 4.71069H29.6833C33.6174 4.71069 35.9927 6.45539 35.9927 10.2046V14.8447H32.504V10.8727L32.504 10.8727Z" fill="white"></path><path d="M3.48871 25.1272C3.48871 27.3916 4.45362 28.2082 6.34643 28.2082C8.23924 28.2082 9.20415 27.3916 9.20415 25.1272V18H12.6929V25.7954C12.6929 29.5445 10.3176 31.2892 6.3836 31.2892H6.30934C2.37527 31.2892 0 29.5445 0 25.7954V21.1553H3.48871V25.1272V25.1272Z" fill="white"></path><path d="M3.48871 10.8727C3.48871 8.60836 4.45362 7.79174 6.34643 7.79174C8.23924 7.79174 9.20415 8.60836 9.20415 10.8727V17.9999H12.6929V10.2046C12.6929 6.45539 10.3176 4.71069 6.3836 4.71069H6.30933C2.37527 4.71069 0 6.45539 0 10.2046V14.8447H3.48871V10.8727V10.8727Z" fill="white"></path><path d="M6.21402 24.7991C5.19848 25.8871 4.70996 27.5328 4.70996 29.6151V29.6893C4.70996 33.6242 6.45432 35.9999 10.2028 35.9999H14.8419V32.5105H10.8708C8.60686 32.5105 7.7904 31.5454 7.7904 29.6522C7.7904 28.7057 7.99452 27.9911 8.48162 27.5132" fill="white"></path><path d="M27.5563 27.5592C27.0722 27.0508 26.2896 26.7941 25.1219 26.7941H17.9961V23.3047H25.7899C27.6642 23.3047 29.0374 23.8986 29.942 24.9844" fill="white"></path><path d="M6.21402 11.2008C5.19848 10.1128 4.70996 8.46715 4.70996 6.38486V6.31058C4.70996 2.37573 6.45432 0 10.2028 0H14.8419V3.48939H10.8708C8.60687 3.48939 7.79041 4.4545 7.79041 6.34768C7.79041 7.29426 7.99452 8.00884 8.48163 8.48676" fill="white"></path><path d="M25.1219 3.4894C27.3858 3.4894 28.2023 4.4545 28.2023 6.34768C28.2023 8.24086 27.3858 9.20596 25.1219 9.20596H17.9961V12.6954H25.7899C29.5384 12.6954 31.2827 10.3196 31.2827 6.38486V6.31058C31.2827 2.37573 29.5384 0 25.7899 0H21.1508V3.4894H25.1219H25.1219Z" fill="white"></path><path d="M8.43645 8.44092C8.92058 8.94932 9.70319 9.20605 10.8709 9.20605H17.9967V12.6954H10.2028C8.32863 12.6954 6.95543 12.1015 6.05078 11.0157" fill="white"></path><path d="M29.7793 11.2008C30.7948 10.1128 31.2833 8.46715 31.2833 6.38486V6.31058C31.2833 2.37573 29.539 0 25.7905 0H21.1514V3.48939H25.1225C27.3864 3.48939 28.2029 4.4545 28.2029 6.34768C28.2029 7.29426 27.9988 8.00884 27.5117 8.48676" fill="white"></path></g></symbol></defs></svg>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><symbol id="cs-knot" viewBox="0 0 36 36">
+<path d="M29.7793 24.7991C30.7948 25.8871 31.2833 27.5328 31.2833 29.6151V29.6893C31.2833 33.6242 29.539 35.9999 25.7905 35.9999H21.1514V32.5105H25.1225C27.3864 32.5105 28.2029 31.5454 28.2029 29.6522C28.2029 28.7057 27.9988 27.9911 27.5117 27.5132"/>
+<path d="M10.8708 32.5106C8.60686 32.5106 7.7904 31.5455 7.7904 29.6524C7.7904 27.7592 8.60686 26.7941 10.8708 26.7941H17.9966V23.3047H10.2028C6.45431 23.3047 4.70996 25.6804 4.70996 29.6152V29.6895C4.70996 33.6243 6.45432 36 10.2028 36H14.8419V32.5106H10.8708L10.8708 32.5106Z"/>
+<path d="M32.504 25.1272C32.504 27.3916 31.539 28.2082 29.6462 28.2082C27.7534 28.2082 26.7885 27.3916 26.7885 25.1272V18H23.2998V25.7954C23.2998 29.5445 25.6751 31.2892 29.6091 31.2892H29.6833C33.6174 31.2892 35.9927 29.5445 35.9927 25.7954V21.1553H32.504V25.1272L32.504 25.1272Z"/>
+<path d="M32.504 10.8727C32.504 8.60836 31.539 7.79174 29.6462 7.79174C27.7534 7.79174 26.7885 8.60836 26.7885 10.8727V17.9999H23.2998V10.2046C23.2998 6.45539 25.6751 4.71069 29.6091 4.71069H29.6833C33.6174 4.71069 35.9927 6.45539 35.9927 10.2046V14.8447H32.504V10.8727L32.504 10.8727Z"/>
+<path d="M3.48871 25.1272C3.48871 27.3916 4.45362 28.2082 6.34643 28.2082C8.23924 28.2082 9.20415 27.3916 9.20415 25.1272V18H12.6929V25.7954C12.6929 29.5445 10.3176 31.2892 6.3836 31.2892H6.30934C2.37527 31.2892 0 29.5445 0 25.7954V21.1553H3.48871V25.1272V25.1272Z"/>
+<path d="M3.48871 10.8727C3.48871 8.60836 4.45362 7.79174 6.34643 7.79174C8.23924 7.79174 9.20415 8.60836 9.20415 10.8727V17.9999H12.6929V10.2046C12.6929 6.45539 10.3176 4.71069 6.3836 4.71069H6.30933C2.37527 4.71069 0 6.45539 0 10.2046V14.8447H3.48871V10.8727V10.8727Z"/>
+<path d="M6.21402 24.7991C5.19848 25.8871 4.70996 27.5328 4.70996 29.6151V29.6893C4.70996 33.6242 6.45432 35.9999 10.2028 35.9999H14.8419V32.5105H10.8708C8.60686 32.5105 7.7904 31.5454 7.7904 29.6522C7.7904 28.7057 7.99452 27.9911 8.48162 27.5132"/>
+<path d="M27.5563 27.5592C27.0722 27.0508 26.2896 26.7941 25.1219 26.7941H17.9961V23.3047H25.7899C27.6642 23.3047 29.0374 23.8986 29.942 24.9844"/>
+<path d="M6.21402 11.2008C5.19848 10.1128 4.70996 8.46715 4.70996 6.38486V6.31058C4.70996 2.37573 6.45432 0 10.2028 0H14.8419V3.48939H10.8708C8.60687 3.48939 7.79041 4.4545 7.79041 6.34768C7.79041 7.29426 7.99452 8.00884 8.48163 8.48676"/>
+<path d="M25.1219 3.4894C27.3858 3.4894 28.2023 4.4545 28.2023 6.34768C28.2023 8.24086 27.3858 9.20596 25.1219 9.20596H17.9961V12.6954H25.7899C29.5384 12.6954 31.2827 10.3196 31.2827 6.38486V6.31058C31.2827 2.37573 29.5384 0 25.7899 0H21.1508V3.4894H25.1219H25.1219Z"/>
+<path d="M8.43645 8.44092C8.92058 8.94932 9.70319 9.20605 10.8709 9.20605H17.9967V12.6954H10.2028C8.32863 12.6954 6.95543 12.1015 6.05078 11.0157"/>
+<path d="M29.7793 11.2008C30.7948 10.1128 31.2833 8.46715 31.2833 6.38486V6.31058C31.2833 2.37573 29.539 0 25.7905 0H21.1514V3.48939H25.1225C27.3864 3.48939 28.2029 4.4545 28.2029 6.34768C28.2029 7.29426 27.9988 8.00884 27.5117 8.48676"/>
+</symbol></defs></svg>
+      <!-- Hlavička: logo, navigace pro obě strany trhu, hlavní CTA -->
+      <div class="n1-top">
+        <!-- Značka: TalentStone + endorsement rodiče („by Cornerstone" + logo) -->
+        <div class="n1-brand">
+          <div class="n1-logo" style="display:flex;align-items:center;gap:9px;"><svg viewBox="0 0 166 120" style="height:26px;width:36px;" aria-hidden="true"><path fill="#98a3ae" d="M8,120 V92 L32,84 V120 Z"/><path fill="#b8c2cc" d="M40,120 V74 L64,64 V120 Z"/><path fill="#cfd6dd" d="M72,120 V56 L96,44 V120 Z"/><path fill="#e3e8ec" d="M104,120 V40 L128,26 V120 Z"/><path fill="#e41e26" d="M136,120 L166,120 L151,8 Z"/></svg>Talent<span>Stone</span></div>
+          <div class="n1-by">by <svg class="cs-logo" viewBox="0 0 348 36" role="img" aria-label="Cornerstone"><use href="#cs-logo"/></svg></div>
+        </div>
+        <!-- Navigace: každá položka skroluje na příslušnou sekci (jump: obrazovka 0 + ID sekce) -->
+        <div class="n1-nav"><span onclick="jump(0,'sec-odbornici')"><b>Pro odborníky</b></span><span onclick="jump(0,'sec-poptavka',1)">Pro firmy</span><span onclick="jump(0,'sec-kandidati')">Lidé v kariérním přechodu</span><span onclick="jump(0,'sec-funguje')">Jak to funguje</span><span onclick="jump(0,'sec-ceny')">Tržiště služeb</span><span onclick="jump(0,'sec-faq')">FAQ</span></div>
+        <!-- Hlavní CTA vede na 3krokový formulář poptávky (reset na krok 0) -->
+        <div class="n1-btn" onclick="jump(0,'sec-prihlaska')">Připojit se k síti</div>
+      </div>
+
+      <!-- Hero: brand esence (mění se dle přepnutého masterbrandu) + CTA + statistiky důvěry -->
+      <!-- Hero: expert-first claim dle prezentace Leadership Network -->
+      <div class="n1-hero">
+        <h2>Your Experience. Your Next Opportunity.</h2>
+        <p class="esence">Odbornost, na kterou se staví.</p>
+        <p>Ekosystém pro zkušené manažery a odborníky, kteří chtějí být připraveni na svou další profesní kapitolu — nová vedoucí role, interim management, poradenství, dozorčí rady, nebo jen rozšíření profesních možností do budoucna. Pod hlavičkou Cornerstone, s mezinárodní sítí.</p>
+        <div class="n1-cta"><span class="a" onclick="jump(0,'sec-prihlaska')">Připojit se k síti</span><span class="b" onclick="jump(0,'sec-poptavka',1)">Hledám experty pro firmu</span></div>
+        <div class="n1-stats">
+          <div><b>35+ let</b><span>zkušeností hlavičky Cornerstone</span></div>
+          <div><b>70+ zemí</b><span>síť Cornerstone International Group</span></div>
+          <div><b>5 pilířů</b><span>od Talent Pool po Interim Community</span></div>
+          <div><b>1 síť</b><span>interim · advisory · board · executive role</span></div>
+        </div>
+        <svg class="ridge" viewBox="0 -10 1200 80" preserveAspectRatio="none" aria-hidden="true">
+          <path fill="#ffffff" d="M0,70 L0,30 L90,46 L170,16 L260,40 L340,24 L430,48 L520,10 L610,38 L700,20 L790,44 L880,12 L970,36 L1060,22 L1150,46 L1200,28 L1200,70 Z"/>
+          <path stroke="#e41e26" stroke-width="2.5" fill="none" d="M520,10 L520,-6"/>
+          <path fill="#e41e26" d="M520,-6 L538,-1 L520,4 Z"/>
+        </svg>
+      </div>
+
+      <!-- Trust bar: endorsement Cornerstone + právní signály -->
+      <div class="n1-trust">
+        <span class="n1-badge">◆ Služba hlavičky Cornerstone</span>
+        <span>Expert spolupracuje na vlastní smlouvu (OSVČ / s.r.o.)</span>
+        <span>Hodinové sazby v souladu s minimální mzdou</span>
+      </div>
+
+      <!-- ===== SEKCE: TALENTSTONE LEADERSHIP NETWORK (expert-first, dle prezentace) ===== -->
+      <div class="n4-hero" id="sec-odbornici" style="padding:44px 34px;">
+        <div class="kicker">TalentStone Leadership Network · by Cornerstone</div>
+        <h2 style="font-size:30px;">Your Experience. Your Next Opportunity.</h2>
+        <p>Během kariéry přicházejí okamžiky, kdy je potřeba udělat další krok — plánovaně, nebo v důsledku reorganizace a vývoje trhu. Pro zkušené manažery a odborníky kariérní změna neznamená začínat znovu: znamená najít nový způsob, jak využít zkušenosti, znalosti a kontakty budované po mnoho let. Interim, poradenství, dozorčí rady — nebo další vedoucí role.</p>
+        <span class="n4-cta" onclick="jump(0,'sec-prihlaska')">Připojit se k síti</span><span class="n4-cta sec" onclick="jump(0,'sec-pilire')">Pět pilířů sítě ↓</span>
+      </div>
+      <div class="n4-process" id="sec-pilire" style="padding-bottom:34px;">
+        <h3>Pět pilířů Leadership Network</h3>
+        <p class="lead">Ekosystém pro zkušené profesionály, kteří chtějí být připraveni na svou další profesní kapitolu.</p>
+        <div class="n4-pgrid">
+          <div class="n4-p"><i>01</i><b>Executive Talent Pool</b><span>Vstupní brána do sítě. C-level, ředitelé, experti a interim manažeři — segmentovaní dle oboru, funkce a lokality.</span></div>
+          <div class="n4-p"><i>02</i><b>Career Transition Program</b><span>Osobní značka, životopis a LinkedIn, příprava na pohovory, individuální koučink, AI nástroje, podpora expertů.</span></div>
+          <div class="n4-p"><i>03</i><b>Interim Academy</b><span>Praktická příprava na interim role: cenotvorba, smlouvy, hodnotová nabídka, získávání zakázek, mentoring.</span></div>
+          <div class="n4-p"><i>04</i><b>Certified Interim Leaders</b><span>Certifikace potvrzuje zkušenosti a připravenost převzít transformační projekty, krize i dočasné vedení.</span></div>
+          <div class="n4-p"><i>05</i><b>Interim Community</b><span>Dlouhodobé zázemí: networking, sdílení zkušeností, mentoring, viditelnost — až po board role.</span></div>
+        </div>
+        <p style="font-family:system-ui;font-size:12.5px;color:#5c6875;margin-top:14px;">Zajímá vás, <span style="color:#b3151e;cursor:pointer;text-decoration:underline;" onclick="jump(0,'sec-provereni')">jak probíhá prověření ↓</span></p>
+      </div>
+      <div class="n4-benefits" id="sec-proc">
+        <h3>Proč se připojit</h3>
+        <div class="n4-grid">
+          <div class="n4-b"><i>◆</i><b>Silná jistota v kariéře</b><span>Buďte připraveni, až to budete potřebovat — dlouhodobé partnerství, ne jednorázový program.</span></div>
+          <div class="n4-b"><i>◆</i><b>Podpora při transformaci</b><span>Odborné vedení na cestě ke změně: osobní značka, LinkedIn, pohovory, koučink, AI nástroje.</span></div>
+          <div class="n4-b"><i>◆</i><b>Certifikace interim lídra</b><span>Dovednosti a certifikaci pro samostatné vedení transformačních projektů.</span></div>
+          <div class="n4-b"><i>◆</i><b>Síla značky a důvěryhodnost</b><span>Využijte reputaci Cornerstone — 35+ let v executive search a interim managementu.</span></div>
+          <div class="n4-b"><i>◆</i><b>Nové příležitosti</b><span>Přístup k exekutivním, interim, poradenským a dozorčím rolím i projektům.</span></div>
+          <div class="n4-b"><i>◆</i><b>Profesionální komunita</b><span>Propojte se, sdílejte a rozvíjejte se s kolegy a experty napříč obory.</span></div>
+        </div>
+      </div>
+      <div class="n4-process" id="sec-provereni">
+        <h3>Jak se stanete prověřeným odborníkem</h3>
+        <p class="lead">Pět kroků, obvykle do 7 dní. Pokud nevyhovíte, řekneme vám to zdvořile a s vysvětlením.</p>
+        <div class="n4-pgrid">
+          <div class="n4-p"><i>01</i><b>Přihláška</b><span>Formulář + portfolio. Stačí 15 minut.</span></div>
+          <div class="n4-p"><i>02</i><b>Identita a oprávnění</b><span>Doklady, živnostenské oprávnění, rejstříky.</span></div>
+          <div class="n4-p"><i>03</i><b>Reference</b><span>2 ověřené reference z posledních 3 let.</span></div>
+          <div class="n4-p"><i>04</i><b>Kompetenční rozhovor</b><span>Dle oborové matice. 45 minut.</span></div>
+          <div class="n4-p"><i>05</i><b>Zařazení do poolu</b><span>Badge „Prověřený". Roční recertifikace.</span></div>
+        </div>
+      </div>
+
+      <!-- Sekce: cílové segmenty firem (4 karty) -->
+      <div class="n1-sec" id="sec-firmy">
+        <h3>Pro firmy: kdy nás potřebujete</h3>
+        <p class="lead">Prověření odborníci z Leadership Network i lidé v kariérním přechodu — propojení s reálnou poptávkou firem, v ČR s mezinárodním standardem.</p>
+        <div class="n1-cols">
+          <div class="n1-col"><i>◆</i><b>Firmy v transformaci</b><span>Reorganizace, digitalizace, turnaround. Interim kapacity na měsíce, ne na inzeráty.</span></div>
+          <div class="n1-col"><i>◆</i><b>Mid-size firmy</b><span>100–1000 zaměstnanců bez velkého HR týmu. Expert na míru bez zdlouhavého náboru.</span></div>
+          <div class="n1-col"><i>◆</i><b>Startupy a scale-upy</b><span>Fractional CTO/CFO/CHRO — seniorní know-how na částečný úvazek.</span></div>
+          <div class="n1-col"><i>◆</i><b>Firmy propouštějící</b><span>Dostupný outplacement: vaši lidé mají práci, rozvoj i podporu dřív, než najdou novou roli.</span></div>
+        </div>
+      </div>
+
+      <!-- Sekce: 4krokový proces (od poptávky k expertovi) -->
+      <div class="n1-sec" id="sec-funguje" style="background:#f6f4ef;">
+        <h3>Jak spolupracujeme s firmami</h3>
+        <p class="lead">Čtyři kroky od poptávky k expertovi. Bez procházení databází a bez aukcí — po úvodní konzultaci vám představíme kandidáty na míru.</p>
+        <div class="n1-steps">
+          <div class="n1-step"><i>01</i><b>Zadáte poptávku</b><span>Krátká konzultace (30 min) nebo formulář. Zdarma a nezávazně.</span></div>
+          <div class="n1-step"><i>02</i><b>Prověříme a spárujeme</b><span>Osobní konzultant vybere experty dle kompetenční matice vašeho oboru.</span></div>
+          <div class="n1-step"><i>03</i><b>Dostanete výběr expertů</b><span>Několik profilů s referencemi a výsledky — ne 500 výsledků.</span></div>
+          <div class="n1-step"><i>04</i><b>Průběžná péče</b><span>Konzultant zůstává v kontaktu po celou dobu spolupráce. Když něco nesedí, hledáme řešení hned.</span></div>
+        </div>
+      </div>
+
+      <!-- Katalog odborníků je skrytý do fáze 3 (rozhodnutí č. 5). -->
+
+      <!-- Sekce: ceník dle schváleného modelu PeopleSphere™ (v1.2 — service fees místo předplatného) -->
+      <!-- Sekce: Tržiště služeb — struktura ceníku bez čísel; konkrétní ceny na vyžádání -->
+      <div class="n1-sec" id="sec-ceny" style="background:#f6f4ef;">
+        <h3>Tržiště služeb</h3>
+        <p class="lead">Zaplatíte jen to, co skutečně využijete — transparentní service fee, kandidáti bez vstupních poplatků. Konkrétní ceník zasíláme na vyžádání.</p>
+        <div class="n1-cols" style="grid-template-columns:repeat(3,1fr);">
+          <div class="n1-col" style="background:#fff;">
+            <i>◆</i><b>Firmy &amp; outplacement</b>
+            <span style="margin-bottom:8px;">Vstup kandidáta do programu<br>Roční firemní přístup k poolu<br>Success fee z umístění<br>WorkHub™ úkoly pro vaše lidi</span>
+            <span class="btn o" style="margin-top:10px;" onclick="jump(0,'sec-poptavka',1)">Vyžádat ceník</span>
+          </div>
+          <div class="n1-col" style="background:#0e2723;color:#f3efe6;border-color:#0e2723;">
+            <i style="color:#c9a86a;">◆</i><b style="color:#f3efe6;">Interim &amp; expertní role</b>
+            <span style="color:#b9c7c0;margin-bottom:8px;">Interim mandáty a shadow management<br>Mentoring, koučink, projektové role<br>Stáže — sazby vždy nad minimální mzdou<br>Fee platí zadavatel, ne expert</span>
+            <span style="color:#9fb2aa;">Sazby expertů dle oboru a rozsahu — transparentně před podpisem</span>
+            <span class="btn" style="margin-top:10px;" onclick="jump(0,'sec-poptavka',1)">Vyžádat ceník</span>
+          </div>
+          <div class="n1-col" style="background:#fff;">
+            <i>◆</i><b>Agentury &amp; recruiteři</b>
+            <span style="margin-bottom:8px;">Roční licence agentury i recruiters<br>Odběr kandidátů ze sdíleného poolu<br>WorkHub™ fee z krátkých zakázek<br>Transparentní pravidla spolupráce</span>
+            <span class="btn o" style="margin-top:10px;" onclick="jump(0,'sec-poptavka',1)">Vyžádat ceník</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- FAQ: nativní <details> – první otázka je předem rozbalená -->
+      <div class="n1-sec" id="sec-faq">
+        <h3>Časté otázky</h3>
+        <div class="n1-faq">
+          <details open><summary>Je to bezpečné? Neriskujeme švarcsystém?</summary><p>Expert vystupuje jako OSVČ/s.r.o. na vlastní smlouvu s vámi. TalentStone zprostředkovává a poskytuje smluvní šablony. Smluvní model před ostrým spuštěním posoudí právník.</p></details>
+          <details><summary>Co když expert nevyhovuje?</summary><p>Řešíme to hned s vaším konzultantem a hledáme náhradu nebo jiné řešení. Každý engagement hodnotí obě strany, hodnocení buduje vzájemnou pověst.</p></details>
+          <details><summary>Čím se lišíte od job portálů?</summary><p>Neprodáváme inzeráty, prodáváme výsledek: výběr prověřených kandidátů na míru. Job portály vám dají 500 výsledků k filtrování — my uděláme výběr za vás.</p></details>
+          <details><summary>Jak prověřujete odborníky?</summary><p>Pět kroků: identita a oprávnění, dvě ověřené reference z posledních tří let, kompetenční rozhovor dle oborové matice, doložitelné portfolio a výsledky, roční recertifikace. Do sítě nepřijímáme každého — pečlivý výběr buduje důvěru.</p></details>
+          <details><summary>Jsem odborník. Co mi to dává?</summary><p>Zdarma: důstojný profil, poptávky na míru vašim kompetencím, doporučené sazby dle oboru a férové podmínky bez aukcí. Service fee z mandátů platí zadavatel, ne vy.</p></details>
+          <details><summary>Ztratil jsem práci / čeká mě propuštění. Jak se zapojím?</summary><p>Vstupujete přes ověřeného partnera — vašeho (bývalého) zaměstnavatele, personální agenturu nebo recruitera, který vstup hradí. Program zahrnuje poradenské konzultace PsyCare™ (hradí partner programu), WorkHub™ mikroúkoly s odměnou a rekvalifikační programy CareerShift Academy™. Změna zaměstnání není krize – je to restart.</p></details>
+        </div>
+      </div>
+
+      <!-- ===== SEKCE: KANDIDÁTI V KARIÉRNÍM PŘECHODU (PeopleSphere™ program) ===== -->
+      <div class="n1-sec" id="sec-kandidati" style="background:#fff;">
+        <div class="kicker" style="font-size:11px;letter-spacing:2px;color:#c9a86a;text-transform:uppercase;margin-bottom:10px;font-family:system-ui;">PeopleSphere™ program</div>
+        <h3>Ztráta práce není ztráta hodnoty.</h3>
+        <p class="lead">Lidé v kariérním přechodu u nás nezůstávají pasivní: dostávají <b>práci (WorkHub™), rozvoj (CareerShift Academy™) a poradenskou podporu (PsyCare™)</b> — a každý den je vede blíž k nové roli. Vstup přes ověřeného partnera: zaměstnavatele, personální agenturu nebo recruitera.</p>
+        <div class="n1-cols" style="grid-template-columns:repeat(3,1fr);">
+          <div class="n1-col"><i>◆</i><b>Firmy propouštějící</b><span>Dostupný outplacement místo drahé klasické varianty. Vaši lidé dostanou práci, rozvoj i podporu. Prestiž: postaráte se o své lidi.</span></div>
+          <div class="n1-col"><i>◆</i><b>Lidé v kariérním přechodu</b><span>Pracovní rytmus bez vyhoření: placené mikroúkoly, rekvalifikace na AI profese, poradenské konzultace. „Změna zaměstnání není krize – je to restart."</span></div>
+          <div class="n1-col"><i>◆</i><b>Agentury a recruiteři</b><span>Nový zdroj kandidátů: sdílený pool, transparentní pravidla, roční licence. Krátkodobé zakázky pro vaše kandidáty z WorkHub™.</span></div>
+        </div>
+        <div class="n1-steps" style="margin-top:24px;grid-template-columns:repeat(5,1fr);">
+          <div class="n1-step"><i>01</i><b>Vstup přes partnera</b><span>Zaměstnavatel, agentura nebo recruiter. Validace a dokumenty.</span></div>
+          <div class="n1-step"><i>02</i><b>Stabilizace</b><span>PsyCare™: poradenské konzultace a kariérní diagnostika (hradí partner).</span></div>
+          <div class="n1-step"><i>03</i><b>SkillMatrix™</b><span>Analýza kompetencí, potenciál rekvalifikace, časové možnosti.</span></div>
+          <div class="n1-step"><i>04</i><b>Práce a rozvoj</b><span>WorkHub™ úkoly + CareerShift Academy™ (AI reskilling).</span></div>
+          <div class="n1-step"><i>05</i><b>Umístění</b><span>Nová práce, projekt — nebo role mentora pro další kandidáty.</span></div>
+        </div>
+        <div style="margin-top:24px;font-family:system-ui;font-size:12.5px;color:#6a736e;background:#f6f4ef;border-radius:10px;padding:14px 18px;">
+          <b style="color:#0e2723;">Chcete se postarat o své propouštěné?</b> Vstup kandidátů hradíte vy jako partner — konkrétní ceník zašleme na vyžádání. <span class="btn o" style="cursor:pointer;" onclick="jump(0,'sec-poptavka',1)">Poptat outplacement</span>
+        </div>
+      </div>
+
+      <!-- ===== SEKCE: WORKHUB™ (mikroúkoly a projekty) ===== -->
+      <div class="n1-sec" id="sec-workhub" style="background:#f6f4ef;">
+        <h3>WorkHub™ — práce, která drží v rytmu</h3>
+        <p class="lead">Mikroúkoly, krátkodobé projekty a testovací zakázky od partnerských firem. Kandidáti neztrácejí kompetence ani sebevědomí — a partneři dostávají ověřené profily s reálným výkonem.</p>
+        <div class="n1-steps" style="grid-template-columns:repeat(4,1fr);">
+          <div class="n1-step"><i>◆</i><b>Partner zadá úkol</b><span>Research, data práce, administrativa, korektury, odborné úkoly. Placené od partnerských firem.</span></div>
+          <div class="n1-step"><i>◆</i><b>Aplikace spáruje</b><span>Doporučí kandidáty podle času, skills a vytíženosti (SkillMatrix™).</span></div>
+          <div class="n1-step"><i>◆</i><b>Kandidát dodá</b><span>Férová odměna za dodaný úkol — hodinová sazba vždy nad minimální mzdou.</span></div>
+          <div class="n1-step"><i>◆</i><b>Reputace roste</b><span>Feedback + hodnocení kvality, rychlosti a komunikace. Vstupní brána k větším projektům.</span></div>
+        </div>
+      </div>
+
+      <!-- ===== PŘIHLÁŠKA ODBORNÍKA: Tally formulář db02dz ===== -->
+      <div class="n1-sec" id="sec-prihlaska" style="background:#fff;">
+        <h3 style="text-align:center;">Požádat o prověření</h3>
+        <p class="lead" style="text-align:center; margin-left:auto; margin-right:auto;">Zdarma, zabere to zhruba 15 minut. Ozveme se vám — i pokud nezaujmeme, zdvořile a s vysvětlením.</p>
+        <div class="tally-card">
+          <iframe data-tally-src="https://tally.so/embed/db02dz?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1" loading="lazy" width="100%" height="600" frameborder="0" marginheight="0" marginwidth="0" title="Přihláška odborníka — TalentStone"></iframe>
+        </div>
+        <p class="tally-fallback">Formulář se nenačetl? <a href="https://tally.so/r/db02dz" target="_blank" rel="noopener">Otevřete ho v novém okně</a>.</p>
+      </div>
+
+      <!-- ===== POPTÁVKA FIRMY: Tally formulář kbG7Qj ===== -->
+      <div class="n1-sec" id="sec-poptavka" style="background:#f6f4ef; padding-bottom: 40px;">
+        <h3 style="text-align:center;">Zadejte poptávku — zabere to pár minut</h3>
+        <p class="lead" style="text-align:center; margin-left:auto; margin-right:auto;">Zdarma a nezávazně. Ozve se vám osobní konzultant a domluví další postup.</p>
+        <div class="tally-card">
+          <iframe data-tally-src="https://tally.so/embed/kbG7Qj?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1" loading="lazy" width="100%" height="600" frameborder="0" marginheight="0" marginwidth="0" title="Poptávka — TalentStone"></iframe>
+        </div>
+        <p class="tally-fallback">Formulář se nenačetl? <a href="https://tally.so/r/kbG7Qj" target="_blank" rel="noopener">Otevřete ho v novém okně</a>.</p>
+      </div>
+
+      <!-- ===== SEKCE „HLAVIČKA CORNERSTONE" – inspirována stránkou Cornerstone Prague
+           (struktura: úvod → specializace → kontakt), moderně zjednodušená pro TalentStone ===== -->
+      <div class="n1-sec" id="sec-cornerstone" style="background:#fff;">
+        <div class="cs-strip">
+          <div class="cs-left">
+            <div class="kicker">◆ Stojí za námi</div>
+            <h3>Cornerstone Prague</h3>
+            <p class="lead">TalentStone je služba hlavičky Cornerstone — executive search a interim managementu s <b>více než 35 lety zkušeností</b> v ČR. Pomáháme firmám přecházet od zakladatelského k profesionálně řízenému byznysu.</p>
+            <div class="cs-contact">
+              <b>Cornerstone Prague</b>
+              <span>Nad Akáty 1607/6, Praha 4, 148 00</span>
+              <span>Kontakt: <a href="mailto:radim-kobersky@cornerstone-prague.com" style="color:inherit;">radim-kobersky@cornerstone-prague.com</a></span>
+            </div>
+            <div class="demo-note">Testovací verze: finální e-mail, telefon a IČO doplníme před ostrým spuštěním.</div>
+          </div>
+          <div class="cs-right">
+            <div class="cs-spec-h">Specializace hlavičky Cornerstone</div>
+            <ul class="cs-spec">
+              <li>Interim management &amp; fractional executives</li>
+              <li>Direct / executive search</li>
+              <li>Boardroom advisory a transformace</li>
+              <li>Executive coaching</li>
+              <li>Talent development a následnictví</li>
+              <li>Mzdové průzkumy a analýzy (Pay-Fair)</li>
+            </ul>
+            <!-- Bílé logo Cornerstone – na světlém pozadí proto v tmavém rámečku -->
+            <div class="cs-mark"><svg class="cs-logo" viewBox="0 0 348 36" role="img" aria-label="Cornerstone"><use href="#cs-logo"/></svg></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sekce: reference — velké citáty (inspirace Happydance) -->
+      <div class="n1-sec" id="sec-reference" style="background:#f6f4ef;">
+        <h3>Slova těch, kteří síť tvoří</h3>
+        <p class="lead">Zakladatel ručí jménem Cornerstone, členové sítě zkušeností ze svých dalších kapitol.</p>
+        <div class="n1-quotes">
+          <div class="n1-q">
+            <p>Důvěra je jediná měna, která se nedá zrychlit. Proto každého odborníka v síti známe osobně — a za každého z nich ručíme.</p>
+            <div class="who"><b>Radim Koberský</b><span>zakladatel, Cornerstone Prague</span></div>
+          </div>
+        </div>
+        <div class="demo-note">Reference členů sítě doplníme po prvních spolupracích (se souhlasem).</div>
+      </div>
+
+      <!-- Finální CTA sekce -->
+      <div class="n1-cta-sec">
+        <div><h3>Vaše zkušenosti jsou příliš cenné na to, aby zůstaly nevyužité.</h3><p>Připojte se k Leadership Network. Konkrétní podmínky a ceník zašleme na vyžádání.</p></div>
+        <span class="n1-cta a" style="display:inline-block;" onclick="jump(0,'sec-prihlaska')">Připojit se k síti</span>
+      </div>
+
+      <!-- Patička: značka + „by Cornerstone" s logem, pak právní text a odkazy -->
+      <div class="n1-foot">
+        <div>
+          <div class="n1-brand">
+            <div class="n1-logo" style="font-size:16px;display:flex;align-items:center;gap:7px;"><svg viewBox="0 0 166 120" style="height:20px;width:28px;" aria-hidden="true"><path fill="#98a3ae" d="M8,120 V92 L32,84 V120 Z"/><path fill="#b8c2cc" d="M40,120 V74 L64,64 V120 Z"/><path fill="#cfd6dd" d="M72,120 V56 L96,44 V120 Z"/><path fill="#e3e8ec" d="M104,120 V40 L128,26 V120 Z"/><path fill="#e41e26" d="M136,120 L166,120 L151,8 Z"/></svg><span>Talent<span>Stone</span></span></div>
+            <div class="n1-by">by <svg class="cs-logo" viewBox="0 0 348 36" role="img" aria-label="Cornerstone"><use href="#cs-logo"/></svg></div>
+          </div>
+          <span style="display:block;margin-top:10px;">© 2026 TalentStone · služba hlavičky Cornerstone · Nad Akáty 1607/6, Praha 4 · IČO: doplníme · testovací verze</span>
+        </div>
+        <!-- Odkazy v patičce skrolují na příslušné sekce N1 (obrazovka 0) -->
+        <span class="foot-links"><span onclick="jump(0,'sec-odbornici')">Odborníci</span> · <span onclick="jump(0,'sec-kandidati')">Lidé v kariérním přechodu</span> · <span onclick="jump(0,'sec-workhub')">WorkHub™</span> · <span onclick="jump(0,'sec-poptavka',1)">Pro firmy</span> · <span onclick="jump(0,'sec-ceny')">Tržiště služeb</span> · <a href="zpco.html" style="color:inherit;">Soukromí a GDPR</a> · <span onclick="jump(0,'sec-cornerstone')">Stojí za námi</span> · <span onclick="jump(0,'sec-poptavka',1)">Kontakt</span></span>
+      </div>
+<script>
+
+  // pickChip: výběr hodnoty ve skupině "chips" (radio-logika).
+  // Zruší .on u všech sourozenců a označí kliknutý prvek.
+  function pickChip(el) {
+    el.parentElement.querySelectorAll('.ob-chip').forEach(c => c.classList.remove('on'));
+    el.classList.add('on');
+  }
+
+  // jump: obsluha všech odkazů na stránce.
+  // 1) plynule odroluje na sekci s daným id,
+  // 2) resetForm=1 vrátí 3krokový formulář poptávky na krok 0.
+  // (Parametr i zůstává kvůli dřívějším odkazům v HTML, ale ignoruje se.)
+  function jump(i, id, resetForm) {
+    // Malé zpoždění, aby skrolování navázalo na případné resetování formuláře.
+    setTimeout(() => {
+      const el = document.getElementById(id);
+      if (!el) return;
+      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      // Viditelná odezva: cíl se krátce zvýrazní červeně.
+      // Funguje i v prostředích bez vnitřního skrolování (např. plně rozevřený náhled),
+      // kde samotné scrollIntoView nemá žádný viditelný efekt.
+      el.classList.remove('jump-flash');
+      void el.offsetWidth; // restart animace při opakovaném kliknutí
+      el.classList.add('jump-flash');
+      setTimeout(() => el.classList.remove('jump-flash'), 1600);
+    }, 60);
+  }
+
+  // ===== INSPIRAČNÍ POHYB: scroll-reveal se sekvenováním =====
+  // Karty pilířů, benefitů, sloupců, kroků i expertů vystupují do popředí
+  // postupně (90ms odstupy) — „hřeben hor" — jakmile se přiblíží k výřezu.
+  (function () {
+    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    // Mřížky: každá karta dostane rostoucí zpoždění --d (vystupují zleva doprava)
+    //
+    document.querySelectorAll('.n4-pgrid, .n4-grid, .n1-cols, .n1-steps, .n1-experts, .n1-quotes').forEach(function (grid) {
+      Array.prototype.forEach.call(grid.children, function (card, i) {
+        card.classList.add('rv');
+        card.style.setProperty('--d', (i * 90) + 'ms');
+      });
+    });
+
+    // Nadpisy, úvody a CTA sekcí: jemné objevení bez zpoždění
+   
+    document.querySelectorAll('h3, p.lead, .n4-hero .kicker, .n4-hero h2, .n4-hero > p, .n4-cta, .n1-trust').forEach(function (el) {
+      if (!el.classList.contains('rv')) el.classList.add('rv');
+    });
+
+    // Spuštění: IntersectionObserver zapne .in, až prvek vjede do záběru
+    var io = null;
+    if (!reduce && 'IntersectionObserver' in window) {
+      io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+        });
+      }, { threshold: 0.12 });
+    }
+    document.querySelectorAll('.rv').forEach(function (el) {
+      if (io) io.observe(el); else el.classList.add('in');
+    });
+  })();
+
+  // ===== INSPIRACE HAPPYDANCE: POČÍTADLA + KONVERZAČNÍ PRŮVODCE =====
+
+  // 1) Statistiky v hero se odrolovují od nuly („35+ let", „70+ zemí"…)
+  (function () {
+    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    document.querySelectorAll('.n1-stats div b').forEach(function (b) {
+      var m = (b.textContent || '').match(/^(\d+)(.*)$/);
+      if (!m || reduce) return;
+      var target = parseInt(m[1], 10), suffix = m[2], t0 = null;
+      var dur = target > 20 ? 1500 : 650; // velká čísla plynule, malá svižně
+      setTimeout(function () {
+        function tick(ts) {
+          if (!t0) t0 = ts;
+          var p = Math.min((ts - t0) / dur, 1);
+          var eased = 1 - Math.pow(1 - p, 3);
+          b.textContent = Math.round(target * eased) + suffix;
+          if (p < 1) requestAnimationFrame(tick);
+        }
+        requestAnimationFrame(tick);
+      }, 650); // synchronizace se vstupní animací hero
+    });
+  })();
+
+  // 2) Progress bar čtení + 3) sticky CTA + 4) průvodce „Kde začít?"
+  (function () {
+    var readBar = document.createElement('div');
+    readBar.id = 'readBar';
+    document.body.appendChild(readBar);
+
+    var sticky = document.createElement('button');
+    sticky.id = 'stickyCta';
+    sticky.type = 'button';
+    sticky.textContent = 'Připojit se k síti ↗';
+    sticky.onclick = function () { jump(0, 'sec-prihlaska'); };
+    document.body.appendChild(sticky);
+
+    var guide = document.createElement('div');
+    guide.id = 'guide';
+    guide.innerHTML =
+      '<button id="guideChip" type="button"><span class="dot"></span>Kde začít?</button>' +
+      '<div id="guidePanel">' +
+        '<div class="g-title">Rychlý průvodce</div>' +
+        '<div class="g-sub">Vyberte, co vás zajímá — dovedeme vás přímo tam.</div>' +
+        '<a data-go="sec-prihlaska" data-reset=""><b>→</b>Chci se připojit k síti</a>' +
+        '<a data-go="sec-poptavka" data-reset="1"><b>→</b>Hledám experty pro firmu</a>' +
+        '<a data-go="sec-proc"><b>→</b>Proč se připojit?</a>' +
+        '<a data-go="sec-provereni"><b>→</b>Jak probíhá prověření?</a>' +
+        '<a data-go="sec-ceny"><b>→</b>Kolik co stojí? (ceník na vyžádání)</a>' +
+      '</div>';
+    document.body.appendChild(guide);
+    guide.querySelector('#guideChip').onclick = function () { guide.classList.toggle('open'); };
+    guide.querySelectorAll('#guidePanel a').forEach(function (a) {
+      a.onclick = function () {
+        guide.classList.remove('open');
+        jump(0, a.getAttribute('data-go'), a.getAttribute('data-reset') === '1');
+      };
+    });
+
+    function onScroll() {
+      var h = document.documentElement.scrollHeight - window.innerHeight;
+      readBar.style.width = (h > 0 ? Math.min(window.scrollY / h, 1) * 100 : 0) + '%';
+      sticky.classList.toggle('show', window.scrollY > window.innerHeight * 0.9);
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll);
+    onScroll();
+  })();
+
+  // Tally: načtení vložených formulářů (oficiální embed skript)
+  (function () {
+    var d = document, w = 'https://tally.so/widgets/embed.js';
+    var v = function () {
+      if (typeof Tally !== 'undefined') Tally.loadEmbeds();
+      else d.querySelectorAll('iframe[data-tally-src]:not([src])').forEach(function (e) { e.src = e.dataset.tallySrc; });
+    };
+    if (typeof Tally !== 'undefined') v();
+    else if (d.querySelector('script[src="' + w + '"]') == null) {
+      var s = d.createElement('script'); s.src = w; s.onload = v; s.onerror = v; d.body.appendChild(s);
+    }
+  })();
+
+  // 5) Veřejný katalog prověřených odborníků — živé hledání
+  //    (prvek N3 „Komunitní katalog" propojený do hlavního webu dle doporučení)
+  (function () {
+    var expGrid = document.getElementById('expGrid');
+    if (!expGrid) return;
+    var expCards = Array.prototype.slice.call(expGrid.querySelectorAll('.n1-exp'));
+    var expSearch = document.getElementById('expSearch');
+    var expBtn = document.getElementById('expBtn');
+    var expCount = document.getElementById('expCount');
+    function filterExp() {
+      var q = (expSearch.value || '').toLowerCase().trim();
+      var shown = 0;
+      expCards.forEach(function (c) {
+        var hit = !q || c.textContent.toLowerCase().indexOf(q) !== -1;
+        c.classList.toggle('hidden', !hit);
+        if (hit) shown++;
+      });
+      expCount.textContent = 'Zobrazeno ' + shown + ' z ' + expCards.length + ' profilů · ukázka veřejného katalogu';
+    }
+    expSearch.addEventListener('input', filterExp);
+    expBtn.addEventListener('click', filterExp);
+  })();
+
+  // 6) DYNAMICKÉ POČÍTADLO PILÍŘŮ — čísla 01–05 se odrolují z 00,
+  //    jakmile karta vjede do záběru; během počítání se číslo
+  //    rozsvítí červeně (dynamické zvýraznění), pak se vrací k tématu.
+  //    Platí pro Pět pilířů i pět kroků prověření (všechny .n4-p).
+  (function () {
+    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    document.querySelectorAll('.n4-pgrid .n4-p').forEach(function (card) {
+      var ic = card.querySelector('i');
+      if (!ic) return;
+      var txt = (ic.textContent || '').trim();
+      if (!/^\d+$/.test(txt)) return;
+      var num = parseInt(txt, 10);
+      var target = ('0' + num).slice(-2);
+      if (reduce || !('IntersectionObserver' in window)) { ic.textContent = target; return; }
+      ic.textContent = '00'; // výchozí stav: počítadlo na nule
+      var cio = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (!e.isIntersecting) return;
+          cio.unobserve(e.target);
+          var d = parseInt((card.style.getPropertyValue('--d') || '0'), 10) || 0;
+          setTimeout(function () {
+            var t0 = null, dur = 420 + num * 80; // vyšší číslo = delší jízda
+            ic.classList.add('counting');
+            function tick(ts) {
+              if (t0 === null) t0 = ts;
+              var p = Math.min((ts - t0) / dur, 1);
+              var eased = 1 - Math.pow(1 - p, 3);
+              ic.textContent = ('0' + Math.round(num * eased)).slice(-2);
+              if (p < 1) requestAnimationFrame(tick);
+              else { ic.textContent = target; ic.classList.remove('counting'); }
+            }
+            requestAnimationFrame(tick);
+          }, d + 120); // start synchronizovaný se stupňováním karet
+        });
+      }, { threshold: 0.12 });
+      cio.observe(card);
+    });
+  })();
+</script>
+</body>
+</html>
