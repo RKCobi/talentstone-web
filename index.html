@@ -543,6 +543,8 @@
   #toTop.show { opacity: 1; transform: none; pointer-events: auto; }
   #toTop:hover { background: #e41e26; }
   @media (prefers-reduced-motion: reduce) { #toTop { transition: none; } }
+  /* Moduly „připravujeme“ (rozhodnutí 25. 11.): skryté, odkrýt odstraněním atributu hidden */
+  [hidden]{display:none !important;}
 </style>
 </head>
 <body class="blue">
@@ -571,7 +573,7 @@
           <div class="n1-logo" style="display:flex;align-items:center;gap:9px;"><svg viewBox="0 0 166 120" style="height:26px;width:36px;" aria-hidden="true"><path fill="#98a3ae" d="M8,120 V92 L32,84 V120 Z"/><path fill="#b8c2cc" d="M40,120 V74 L64,64 V120 Z"/><path fill="#cfd6dd" d="M72,120 V56 L96,44 V120 Z"/><path fill="#e3e8ec" d="M104,120 V40 L128,26 V120 Z"/><path fill="#e41e26" d="M136,120 L166,120 L151,8 Z"/></svg><span>Talent<span>Stone</span></span></div>
           <div class="n1-by">by <svg class="cs-logo" viewBox="0 0 348 36" role="img" aria-label="Cornerstone"><use href="#cs-logo"/></svg></div>
         </div>
-        <nav class="n1-nav" id="mainNav"><span onclick="goTop()">Úvod</span><span onclick="jump(0,'sec-odbornici')">Pro odborníky</span><span onclick="jump(0,'sec-firmy')">Pro firmy</span><span onclick="jump(0,'sec-kandidati')">Kariérní přechod</span><span onclick="jump(0,'sec-ceny')">Tržiště služeb</span><span onclick="jump(0,'sec-faq')">FAQ</span></nav>
+        <nav class="n1-nav" id="mainNav"><span onclick="goTop()">Úvod</span><span onclick="jump(0,'sec-odbornici')">Pro odborníky</span><span onclick="jump(0,'sec-firmy')">Pro firmy</span><span onclick="jump(0,'sec-kandidati')">Career Navigation</span><span onclick="jump(0,'sec-ceny')">Tržiště služeb</span><span onclick="jump(0,'sec-faq')">FAQ</span></nav>
         <div class="n1-btn" onclick="jump(0,'sec-prihlaska')">Připojit se k síti</div>
         <button class="n1-burger" type="button" aria-label="Menu" aria-controls="mainNav" aria-expanded="false" onclick="toggleNav(this)">☰</button>
       </div>
@@ -585,11 +587,11 @@
           <a onclick="jump(0,'sec-odbornici')"><small>Jsem odborník / manažer</small><b>Připravte svou další příležitost</b><span>Prověřený profil, nabídky na míru a podpora při přechodu do nové role.</span><em>Připojit se k síti →</em></a>
           <a class="alt" onclick="jump(0,'sec-firmy')"><small>Hledám experta pro firmu</small><b>Interim, projekt nebo fractional role</b><span>Vybereme za vás prověřené kandidáty. Zdarma a nezávazně.</span><em>Zadat poptávku →</em></a>
         </div>
-        <p class="route-more">Procházíte kariérním přechodem? <span onclick="jump(0,'sec-kandidati')">Program PeopleSphere™</span></p>
+        <p class="route-more">Procházíte kariérním přechodem nebo chcete změnu? <span onclick="jump(0,'sec-kandidati')">Outplacement a Career Navigation</span></p>
         <div class="n1-stats">
           <div><b>35+ let</b><span>zkušeností hlavičky Cornerstone</span></div>
           <div><b>70+ zemí</b><span>síť Cornerstone International Group</span></div>
-          <div><b>5 pilířů</b><span>od Talent Pool po Interim Community</span></div>
+          <div><b>2 služby</b><span>Outplacement · Career Navigation</span></div>
           <div><b>1 síť</b><span>interim · advisory · board · executive role</span></div>
         </div>
         <svg class="ridge" viewBox="0 -10 1200 80" preserveAspectRatio="none" aria-hidden="true">
@@ -613,14 +615,15 @@
       <div class="n4-process" id="sec-odbornici" style="background:#fff;">
         <div class="kicker" style="font-size:11px;letter-spacing:2px;text-transform:uppercase;margin-bottom:10px;color:#b3151e;">Pro odborníky · TalentStone Leadership Network</div>
         <h3>Kariérní změna neznamená začínat znovu</h3>
-        <p class="lead">Znamená najít nový způsob, jak využít zkušenosti, znalosti a kontakty budované po mnoho let. Síť stojí na pěti pilířích.</p>
+        <p class="lead">Znamená najít nový způsob, jak využít zkušenosti, znalosti a kontakty budované po mnoho let. Začínáme dvěma kroky: prověřený profil v síti a Career Navigation. Další programy připravujeme.</p>
         <div class="n4-pgrid">
           <div class="n4-p"><i>01</i><b>Executive Talent Pool</b><span>Vstupní brána do sítě. C-level, ředitelé, experti a interim manažeři — segmentovaní dle oboru, funkce a lokality.</span></div>
-          <div class="n4-p"><i>02</i><b>Career Transition Program</b><span>Osobní značka, životopis a LinkedIn, příprava na pohovory, individuální koučink, AI nástroje, podpora expertů.</span></div>
-          <div class="n4-p"><i>03</i><b>Interim Academy</b><span>Praktická příprava na interim role: cenotvorba, smlouvy, hodnotová nabídka, získávání zakázek, mentoring.</span></div>
-          <div class="n4-p"><i>04</i><b>Certified Interim Leaders</b><span>Certifikace potvrzuje zkušenosti a připravenost převzít transformační projekty, krize i dočasné vedení.</span></div>
-          <div class="n4-p"><i>05</i><b>Interim Community</b><span>Dlouhodobé zázemí: networking, sdílení zkušeností, mentoring, viditelnost — až po board role.</span></div>
+          <div class="n4-p"><i>02</i><b>Career Navigation</b><span>Osobní konzultace, životopis a LinkedIn, nácvik pohovoru (STAR), kam se uplatnit dál. Úvodní balíček je součástí registrace.</span></div>
+          <div class="n4-p" hidden data-pripravujeme><i>03</i><b>Interim Academy</b><span>Praktická příprava na interim role: cenotvorba, smlouvy, hodnotová nabídka, získávání zakázek, mentoring.</span></div>
+          <div class="n4-p" hidden data-pripravujeme><i>04</i><b>Certified Interim Leaders</b><span>Certifikace potvrzuje zkušenosti a připravenost převzít transformační projekty, krize i dočasné vedení.</span></div>
+          <div class="n4-p" hidden data-pripravujeme><i>05</i><b>Interim Community</b><span>Dlouhodobé zázemí: networking, sdílení zkušeností, mentoring, viditelnost — až po board role.</span></div>
         </div>
+        <p class="lead" style="margin-top:16px;font-size:14px;">Připravujeme: Interim Academy, Certified Interim Leaders a Interim Community.</p>
         <div class="inline-cta"><span class="a" onclick="jump(0,'sec-prihlaska')">Připojit se k síti</span><span class="b" onclick="jump(0,'sec-provereni')">Jak probíhá prověření ↓</span></div>
       </div>
 
@@ -660,8 +663,30 @@
         <div class="inline-cta"><span class="a" onclick="jump(0,'sec-poptavka')">Zadat poptávku</span><span class="b" onclick="jump(0,'sec-ceny')">Tržiště služeb ↓</span></div>
       </div>
 
-      <!-- 4) KARIÉRNÍ PŘECHOD: PeopleSphere™ + WorkHub™ v jedné sekci -->
+      <!-- 4) OUTPLACEMENT A CAREER NAVIGATION (modul 1, rozhodnutí 25.–27. 11.) -->
       <div class="n1-sec" id="sec-kandidati" style="background:#f6f4ef;">
+        <div class="kicker" style="font-size:11px;letter-spacing:2px;text-transform:uppercase;margin-bottom:10px;">Outplacement · Career Navigation</div>
+        <h3>Ztráta práce není ztráta hodnoty.</h3>
+        <p class="lead">Pomáháme lidem, kteří končí ve firmě nebo chtějí změnu, najít další příležitost. Osobně, ne jen přes online kurz: konzultant, který zná trh a ví, co firmy hledají.</p>
+        <div class="n1-cols" style="grid-template-columns:repeat(2,1fr);">
+          <div class="n1-col"><i>◆</i><b>Outplacement pro firmy</b><span>Propouštíte? Postaráte se o své lidi. Dostanou konzultace, přípravu na trh práce a místo v síti prověřených odborníků. Služba hradí firma.</span></div>
+          <div class="n1-col"><i>◆</i><b>Career Navigation pro jednotlivce</b><span>Končíte, nebo chcete změnu a ještě nekončíte? Projdeme s vámi životopis a LinkedIn, nacvičíme pohovor a najdeme, kde vaše zkušenosti uplatnit.</span></div>
+        </div>
+        <div class="n1-steps" style="margin-top:24px;grid-template-columns:repeat(4,1fr);">
+          <div class="n1-step"><i>01</i><b>Úvodní rozhovor</b><span>Zdarma. Kde jste, co chcete a co vám můžeme nabídnout.</span></div>
+          <div class="n1-step"><i>02</i><b>Prověření a registrace</b><span>Prověřený profil v síti. V registraci je úvodní balíček Career Navigation.</span></div>
+          <div class="n1-step"><i>03</i><b>Příprava</b><span>CV a LinkedIn, nácvik pohovoru, kam dál. Online semináře během roku.</span></div>
+          <div class="n1-step"><i>04</i><b>Další příležitost</b><span>Nová role, interim nebo projekt. Firmy hledají v síti prověřených lidí.</span></div>
+        </div>
+        <div style="margin-top:24px;font-family:var(--ff);font-size:12.5px;color:#5c6875;background:#eef1f4;border-radius:10px;padding:14px 18px;">
+          <b style="color:#2c3e50;">Podmínky a ceník zašleme na vyžádání.</b> <span style="color:#b3151e;text-decoration:underline;cursor:pointer;font-weight:600;white-space:nowrap;" onclick="jump(0,'sec-prihlaska')">Požádat o úvodní rozhovor →</span> · <span style="color:#b3151e;text-decoration:underline;cursor:pointer;font-weight:600;white-space:nowrap;" onclick="jump(0,'sec-poptavka')">Poptat outplacement pro firmu →</span>
+        </div>
+      </div>
+
+      <!-- PŘIPRAVUJEME: původní sekce PeopleSphere™ (WorkHub™, CareerShift™, PsyCare™), skrytá do dalších fází -->
+      <div hidden data-pripravujeme>
+      <!-- 4) KARIÉRNÍ PŘECHOD: PeopleSphere™ + WorkHub™ v jedné sekci -->
+      <div class="n1-sec" id="sec-kandidati-peoplesphere" style="background:#f6f4ef;">
         <div class="kicker" style="font-size:11px;letter-spacing:2px;text-transform:uppercase;margin-bottom:10px;">PeopleSphere™ program</div>
         <h3>Ztráta práce není ztráta hodnoty.</h3>
         <p class="lead">Lidé v kariérním přechodu dostávají <b>práci (WorkHub™), rozvoj (CareerShift Academy™) a poradenskou podporu (PsyCare™)</b>. Vstup přes ověřeného partnera: zaměstnavatele, personální agenturu nebo recruitera.</p>
@@ -684,14 +709,16 @@
         </div>
       </div>
 
+      </div>
+
       <!-- 5) TRŽIŠTĚ SLUŽEB -->
       <div class="n1-sec" id="sec-ceny" style="background:#f6f4ef;">
         <h3>Tržiště služeb</h3>
-        <p class="lead">Zaplatíte jen to, co skutečně využijete — transparentní service fee, kandidáti bez vstupních poplatků. Konkrétní ceník zasíláme na vyžádání.</p>
-        <div class="n1-cols" style="grid-template-columns:repeat(3,1fr);">
+        <p class="lead">Zaplatíte jen to, co skutečně využijete — transparentní service fee pro firmy, odborníci po prověření roční registrace. Konkrétní ceník zasíláme na vyžádání.</p>
+        <div class="n1-cols" style="grid-template-columns:repeat(2,1fr);">
           <div class="n1-col" style="background:#fff;">
             <i>◆</i><b>Firmy &amp; outplacement</b>
-            <span style="margin-bottom:8px;">Vstup kandidáta do programu<br>Roční firemní přístup k poolu<br>Success fee z umístění<br>WorkHub™ úkoly pro vaše lidi</span>
+            <span style="margin-bottom:8px;">Outplacement pro vaše lidi<br>Výběr z prověřených profilů<br>Success fee z umístění</span>
             <span class="btn o" style="margin-top:10px;" onclick="jump(0,'sec-poptavka')">Vyžádat ceník</span>
           </div>
           <div class="n1-col" style="background:#2c3e50;color:#f0f3f6;border-color:#2c3e50;">
@@ -700,7 +727,7 @@
             <span style="color:#b8c2cc;">Sazby expertů dle oboru a rozsahu — transparentně před podpisem</span>
             <span class="btn" style="margin-top:10px;" onclick="jump(0,'sec-poptavka')">Vyžádat ceník</span>
           </div>
-          <div class="n1-col" style="background:#fff;">
+          <div class="n1-col" style="background:#fff;" hidden data-pripravujeme>
             <i>◆</i><b>Agentury &amp; recruiteři</b>
             <span style="margin-bottom:8px;">Roční licence agentury i recruiters<br>Odběr kandidátů ze sdíleného poolu<br>WorkHub™ fee z krátkých zakázek<br>Transparentní pravidla spolupráce</span>
             <span class="btn o" style="margin-top:10px;" onclick="jump(0,'sec-poptavka')">Vyžádat ceník</span>
@@ -716,8 +743,8 @@
           <details><summary>Co když expert nevyhovuje?</summary><p>Řešíme to hned s vaším konzultantem a hledáme náhradu nebo jiné řešení. Každý engagement hodnotí obě strany, hodnocení buduje vzájemnou pověst.</p></details>
           <details><summary>Čím se lišíte od job portálů?</summary><p>Neprodáváme inzeráty, prodáváme výsledek: výběr prověřených kandidátů na míru. Job portály vám dají 500 výsledků k filtrování — my uděláme výběr za vás.</p></details>
           <details><summary>Jak prověřujete odborníky?</summary><p>Pět kroků: identita a oprávnění, dvě ověřené reference z posledních tří let, kompetenční rozhovor dle oborové matice, doložitelné portfolio a výsledky, roční recertifikace. Do sítě nepřijímáme každého — pečlivý výběr buduje důvěru.</p></details>
-          <details><summary>Jsem odborník. Co mi to dává?</summary><p>Zdarma: důstojný profil, poptávky na míru vašim kompetencím, doporučené sazby dle oboru a férové podmínky bez aukcí. Service fee z mandátů platí zadavatel, ne vy.</p></details>
-          <details><summary>Ztratil jsem práci / čeká mě propuštění. Jak se zapojím?</summary><p>Vstupujete přes ověřeného partnera — vašeho (bývalého) zaměstnavatele, personální agenturu nebo recruitera, který vstup hradí. Program zahrnuje poradenské konzultace PsyCare™ (hradí partner programu), WorkHub™ mikroúkoly s odměnou a rekvalifikační programy CareerShift Academy™. Změna zaměstnání není krize – je to restart.</p></details>
+          <details><summary>Jsem odborník. Co mi to dává?</summary><p>Přihláška a úvodní rozhovor jsou zdarma. Po prověření se registrujete na rok: prověřený profil, úvodní balíček Career Navigation, online semináře a nabídky na míru vašim kompetencím. Podmínky zašleme na vyžádání. Service fee z mandátů platí zadavatel, ne vy.</p></details>
+          <details><summary>Ztratil jsem práci / čeká mě propuštění. Jak se zapojím?</summary><p>Pokud vás posílá zaměstnavatel, službu hradí on (outplacement). Jinak se můžete přihlásit sami do Career Navigation: úvodní rozhovor je zdarma, pak konzultace, životopis a LinkedIn, nácvik pohovoru a místo v síti. Změna zaměstnání není krize – je to restart.</p></details>
         </div>
       </div>
 
@@ -725,7 +752,7 @@
       <!-- ===== PŘIHLÁŠKA ODBORNÍKA: Tally formulář db02dz ===== -->
       <div class="n1-sec" id="sec-prihlaska" style="background:#fff;">
         <h3 style="text-align:center;">Požádat o prověření</h3>
-        <p class="lead" style="text-align:center; margin-left:auto; margin-right:auto;">Zdarma, zabere to zhruba 15 minut. Ozveme se vám — i pokud nezaujmeme, zdvořile a s vysvětlením.</p>
+        <p class="lead" style="text-align:center; margin-left:auto; margin-right:auto;">Přihláška je zdarma, zabere zhruba 15 minut. Ozveme se vám — i pokud nezaujmeme, zdvořile a s vysvětlením.</p>
         <div class="tally-card">
           <iframe data-tally-src="https://tally.so/embed/db02dz?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1" loading="lazy" width="100%" height="600" frameborder="0" marginheight="0" marginwidth="0" title="Přihláška odborníka — TalentStone"></iframe>
         </div>
@@ -794,7 +821,7 @@
           <span style="display:block;margin-top:10px;">© 2026 TalentStone · služba hlavičky Cornerstone · Nad Akáty 1607/6, Praha 4 · IČO: doplníme · testovací verze</span>
         </div>
         <!-- Odkazy v patičce skrolují na příslušné sekce N1 (obrazovka 0) -->
-        <span class="foot-links"><span onclick="jump(0,'sec-odbornici')">Odborníci</span> · <span onclick="jump(0,'sec-firmy')">Pro firmy</span> · <span onclick="jump(0,'sec-kandidati')">Kariérní přechod</span> · <span onclick="jump(0,'sec-ceny')">Tržiště služeb</span> · <a href="zpco.html" style="color:inherit;">Soukromí a GDPR</a> · <span onclick="jump(0,'sec-cornerstone')">Stojí za námi</span> · <span onclick="jump(0,'sec-cornerstone')">Kontakt</span></span>
+        <span class="foot-links"><span onclick="jump(0,'sec-odbornici')">Odborníci</span> · <span onclick="jump(0,'sec-firmy')">Pro firmy</span> · <span onclick="jump(0,'sec-kandidati')">Career Navigation</span> · <span onclick="jump(0,'sec-ceny')">Tržiště služeb</span> · <a href="zpco.html" style="color:inherit;">Soukromí a GDPR</a> · <span onclick="jump(0,'sec-cornerstone')">Stojí za námi</span> · <span onclick="jump(0,'sec-cornerstone')">Kontakt</span></span>
       </div>
 <script>
 
